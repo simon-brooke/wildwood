@@ -461,13 +461,16 @@ The application here is to the  adjudication of claims to health insurance benef
 
     Dear [Name of  Claimant]
 
-    You are capable of work and  there are no special circumstances permitting you to be deemed  incapable of work. Although you provided a valid certificate of  explanation, this is insufficient unless either there is evidence  of contact with the disease or you are a known carrier  thereof.
+    Although physically capable of work you may
+    nonetheless be deemed incapable of work today. You are
+    deemed incapable of work for precautionary reasons. You
+    are deemed incapable of work on precautionary grounds
+    as you are under medical care, and your doctor has
+    recommended that you abstain from working.
 
     Yours Sincerely
 
     [your name]
-
-TODO: this is not a very good Arboretum explanation; I know  we did better ones on Widows’ benefit. Check whether I can find a  surviving good one, and substitute it.
 
 ### Discussion
 
@@ -526,7 +529,11 @@ Although these are all LISP like  in form (indeed the assertions themselves are 
 
 ### Example  explanation:
 
-    Well, Peter makes less than 750  dollars, and Peter is under 19, and Harry supports Peter so Peter  is a dependent of Harry's. Uh Peter makes less than 750 dollars  because Peter does not work, and Peter is a dependent of Harry's  because Harry provides more than one half of Peter's  support.
+    Well, Peter makes less than 750  dollars, and Peter is under 19, and
+    Harry supports Peter so Peter  is a dependent of Harry's. Uh Peter
+    makes less than 750 dollars  because Peter does not work, and Peter
+    is a dependent of Harry's  because Harry provides more than one half
+    of Peter's  support.
 
 I should explain that the  application is to the US Federal Income Tax system. This  explanation does indeed capture something of the flavour of a  natural spoken explanation. Furthermore, it is clearly  declarative rather than procedural. However, personally, I find  its style rather too informal for textual presentation. I  particularly dislike the meaningless 'Uh' which is use to tag the  supporting point.
 
