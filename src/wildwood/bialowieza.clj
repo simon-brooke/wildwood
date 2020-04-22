@@ -10,7 +10,7 @@
   (defn decide
     "Decide the truth value of this `proposition` by convening a game between
     these advocate `agents`. Iterate the game until all agents PASS; then finally
-    offer each agent's `assert` method the `proposition` together with the
+    offer each agent's `record` method the `proposition` together with the
     decided truth value (`true` or `false`), before returning that value.
 
     The `proposition` is a proposition as defined in the `wildwood.schema`;

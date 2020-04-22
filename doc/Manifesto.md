@@ -4,13 +4,15 @@ Machine inference – automated reasoning, the core of what gets called
 Artificial Intellegence – has ab initio been based on the assumption
 that the purpose of reasoning was to preserve truth. It is because this
 assumption is false that the project has thus far failed to bear fruit,
-that Allan Turing's eponymous test has yet to be passed.
+that [Allan Turing's eponymous test](https://en.wikipedia.org/wiki/Turing_test) has yet to be passed.
+
+![Clockwork minds](../img/clockwork.png)
 
 Of course it is possible to build machines which, within the constraints
 of finite store, can accurately compute theora of first order predicate
 calculus ad nauseam but such machines do not display behaviour which is
 convincingly intelligent. They are cold and mechanical; we do not
-recognise ourselves in them. Like the Girl in the Fireplace's beautiful
+recognise ourselves in them. Like the [Girl in the Fireplace](https://en.wikipedia.org/wiki/The_Girl_in_the_Fireplace)'s beautiful
 clocks, they are precisely inhuman.
 
 As Turing's test itself shows, intelligence is a hegemonic term, a term

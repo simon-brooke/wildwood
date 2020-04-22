@@ -2,7 +2,7 @@
 
 [Simon Brooke](mailto:simon@journeyman.cc)
 
-> Hey, what IS truth, man? [Beeblebrox, quoted in [Adams, 1978]]
+> "Hey, what IS truth, man?" Beeblebrox, Z, quoted in [Adams, 1978]
 
 *This title is, of course, a respectful nod to Feyerabend's Against Method*
 

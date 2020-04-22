@@ -30,6 +30,12 @@
 
 
 (defprotocol Advocate
+  (record [self proposition value]
+          "Pass a `proposition` with a determined `value` to me, in order that
+          advocates can, if desired, record the determined value in their
+          knowledge base. The API does not require that the advocate records
+          the decision, only that it has the opportunity to do so. Return the
+          value.")
   (id [self] "Return a value which uniquely identifies this agent.")
   (decide [self proposition argument]
           "Return `true`, `false` or `nil` as the value of this `proposition`,
