@@ -8,7 +8,7 @@ There's nothing much here yet, I'm just starting to rebuild.
 
 ## Current motivation
 
-Although the design of Wildwood was originally intended as part of a joint AI/Philosophy PhD thesis, I'm currently rebuilding it because I need it to support some computer game funtionality I'm working on. I'm building it as a library so that it should have dependencies on the game code, and that it should be possible to hook it up to other knowledge sources. Doing that, however, will probably be left as an exercise for the reader.
+Although the design of Wildwood was originally intended as part of [a joint AI/Philosophy PhD thesis](https://simon-brooke.github.io/wildwood/codox/AgainstTruth.html), I'm currently rebuilding it because I need it to support some computer game funtionality I'm working on. I'm building it as a library so that it should have dependencies on the game code, and that it should be possible to hook it up to other knowledge sources. Doing that, however, will probably be left as an exercise for the reader.
 
 ## Usage
 
