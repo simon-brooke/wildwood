@@ -33,10 +33,11 @@ Much of this text was written between 1986 and 1988 on Xerox 1108 and 1186 works
 ### Part Two: Into the wild wood
 
 1. [Arboretum](Arboretum.html)
-2. [Conception](Conception.html)
-3. [Reimagining](Reimagining.html)
-4. [Implementing](Implementing.html)
-5. [Experience](Experience.html)
+2. [Arden](Arden.html)
+3. [KnacqTools](KnacqTools.html)
+4. [Bialowieza](Bialowieza.html)
+5. [Implementing](Implementing.html)
+6. [Experience](Experience.html)
 
 ### Endmatter
 
