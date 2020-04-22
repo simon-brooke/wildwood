@@ -4,9 +4,11 @@
 
 The object of this chapter is to  describe and discuss the development of Expert System  explanations from the beginning' to the most recent systems. The  argument which I will try to advance is that development has been  continuously driven by the perceived inadequacy of the  explanations given; and that, while many ad hoc, and some  principled, approaches have been tried, no really adequate  explanation system has emerged. Further, I will claim that, as  some of the later and more principled explanation systems  accurately model the accounts of explanation advanced in current  philosophy, the philosophical understanding of explanation is  itself inadequate.
 
+{I ought to add to this chapter to give some overview of what's happened since 1990, and look at explanations of neural network decisions, because that will help in later parts/chapters of Part One}
+
 ## Family Tree  of Systems discussed
 
-(diagram here)|
+![Family tree](../img/family-tree.svg)
 
 Chronology relates to publication,  and not to implementation. Links are shown where system designers  acknowledge influence, or where family resemblance between  systems is extremely obvious. In a small field like this, it is  reasonably (but not absolutely) safe to assume that major  practitioners are up to date with the current  literature.
 
@@ -123,7 +125,7 @@ The HOW query, by contrast,  operates on a history list, and requires, as argume
 
 Some numbered statements, eg (5.0)  below, do not appear to be 'test parts' of any rule. It is not  made clear what the effect of asking 'WHY [5.0]' would  be.
 
-####= Example,  user input in bold:
+##### Example,  user input prefixed with '**' prompt:
 
     Where is the suspected portal  of entry of organism-1 into this sterile site?
 
@@ -157,7 +159,7 @@ Some numbered statements, eg (5.0)  below, do not appear to be 'test parts' of a
 
     [4.0] At that point Rule 021  was being used.
 
-    **HOW [4.0] 
+    ** HOW [4.0] 
 
     [I.e., how was Rule 021  used?]
 
@@ -608,7 +610,7 @@ The strategy used is described as  less ambitious than schemes which involve con
 
 Barr, A &amp; Feigenbaum, E A: The  Handbook of 'Artificial Intelligence, Pitman, 82,  especially articles VII B,  TEIRESIAS, and VIII B1, MYCIN
 
-Brooke, S: Interactive Graphical  Representation of Knowledge: in Proceedings of the Alvey KBS Club  SIG on Explanation second workshop, 87
+Brooke, S: Interactive Graphical  Representation of Knowledge: in Proceedings of the Alvey KBS Club  SIG on Explanation second workshop, 87 {have this}
 
 Buchanan, B, Sutherland, G, &amp;  Feigenbaum, EA; Heuristic Dendral: a program for generating  explanatory hypotheses in organic chemistry: in Meltzer &amp; Michie,  eds, Machine Intelligence 4: Edinburgh University Press,  1969;
 
@@ -630,7 +632,7 @@ Mott, P &amp; Brooke, S: A Graphical  Inference Mechanism: in Expert Systems iv,
 
 Pople, H E: The Formation of  Composite Hypotheses in Diagnostic Problem Solving - an Exercise  in Synthetic Reasoning in Papers presented at the 5th  International Joint Conference on Artificial Intelligence, MIT,  1977
 
-Swartout, W: A Digitalis Therapy  Advisor with Explanations: in Proceedings of the 5th  International Joint Conference on Artificial Intelligence, MIT,  1977
+Swartout, W: A Digitalis Therapy  Advisor with Explanations: in Proceedings of the 5th  International Joint Conference on Artificial Intelligence, MIT,  1977 {hav this}
 
 Swartout, W R: XPLAIN: a System  for Creating and Explaining Expert Consulting Programs: in  Artificial Intelligence 21, 1983
 

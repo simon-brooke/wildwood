@@ -1,5 +1,4 @@
-Manifesto
-=========
+# Manifesto
 
 Machine inference – automated reasoning, the core of what gets called
 Artificial Intellegence – has ab initio been based on the assumption
@@ -33,8 +32,7 @@ persuade, not to inform but to convince. This thesis succeeds not if in
 some arid, clockwork, mechanical sense I am right, but if, having read
 it, you believe that I am.
 
-On inference and explanation
-----------------------------
+## On inference and explanation
 
 I wrote the first draft of this thesis thirty two years ago. In that
 draft I was concerned with the very poor explanations that mechanised
