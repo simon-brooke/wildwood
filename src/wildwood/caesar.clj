@@ -23,14 +23,14 @@
    :longus [{:verb :killed :subject :longus :object :caesar :location :forum :date ides-of-march}]
    :forum [{:verb :killed :subject :longus :object :caesar :location :forum :date ides-of-march}]})
 
-(defn faldo-db
-  "Falco knows that Caesar has been killed, but doesn't know who by or when."
+(def faldo-db
+  "Falco knows that Caesar has been killed, but doesn't know by whom or when."
   {:caesar [{:verb :killed :object :caesar :location :forum}]
    :brutus [{:verb :killed :object :caesar :location :forum}]
    :forum [{:verb :killed :object :caesar :location :forum}]})
 
 (def gaius-db
-  "Gaius knows that Brutus killed him, but thinks it happened in April."
+  "Gaius knows that Brutus killed Caesar, but believes it happened in April."
   {:caesar [{:verb :killed :subject :brutus :object :caesar :location :forum :date april}]
    :brutus [{:verb :killed :subject :brutus :object :caesar :location :forum :date april}]
    :forum [{:verb :killed :subject :brutus :object :caesar :location :forum :date april}]})

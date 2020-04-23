@@ -748,7 +748,7 @@ normal conversational discussion in an easily manageable form. Had Toulmin
 advanced this and this only, I think he might have been taken more seriously; and
 I think there is merit in the current revival of interest in it.
 
-### The Schema
+### The Toulmin Schema
 
 Toulmin's concern is with arguments as they are presented informally, in
 conversation or writing, and the relation between the form of such
