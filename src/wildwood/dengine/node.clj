@@ -1,4 +1,4 @@
-(ns wildwood.dengine.engine
+(ns wildwood.dengine.node
   "A dtree node.")
 
 (defn node?

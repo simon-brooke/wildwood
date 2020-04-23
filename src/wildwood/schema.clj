@@ -29,9 +29,6 @@
     :authority  ;; id of agent from whom, or rule from which, I know this.
     })
 
-;; (argument-keys :authority)
-;; (argument-keys :data)
-
 (defn proposition?
   "True if `o` qualifies as a proposition. A proposition is probably a map
   with some privileged keys, and may look something like a minimised
@@ -56,21 +53,6 @@
        ;; are not minimised (indeed, they should not be). TODO: fix.
        (some map? (vals o))))))
 
-;; (proposition? {:verb :killed :subject :brutus :object :caesar}) ;; true
-;; (proposition? {:verb :killed :subject :brutus :object :caesar} true) ;; true
-;; (proposition? {:verb :killed :subject :brutus :object :caesar :truth false}) ;; true
-;; (proposition? {:verb :killed :subject :brutus}) ;; false: no :object key
-;; (proposition? {:verb :killed
-;;                :subject {:id :brutus :name "Marcus Brutus"}
-;;                :object {:id :caesar
-;;                         :name "Gaius Julius Caesar"
-;;                         :wife :drusila}}) ;; true, although not minimised
-;; (proposition? {:verb :killed
-;;                :subject {:id :brutus :name "Marcus Brutus"}
-;;                :object {:id :caesar
-;;                         :name "Gaius Julius Caesar"
-;;                         :wife :drusila}} true) ;; false, because minimisation was required
-
 (defn truth
   "If `p` is a proposition, return whether the value asserted by that
   proposition is `true`. If the `:truth` key is missing, `true` is
@@ -84,10 +66,6 @@
       false
       true)
     nil))
-
-;; (truth {:verb :killed :subject :brutus :object :caesar})
-;; (truth {:verb :killed :subject :brutus :object :caesar :truth true})
-;; (truth {:verb :killed :subject :brutus :object :caesar :truth false})
 
 (defn rule?
   "True if `o` qualifies as a rule. A rule is a structure which comprises
@@ -103,21 +81,16 @@
 (defn argument?
   "True if `o` qualifies as an argument structure.
 
-  An argument structure is a (potentially rich proposition which, in addition, should have values
+  An argument structure is a (potentially rich) proposition which, in addition, should have values
   for `:confidence` and `:authority`. A value for `:data` may, and probably will,
-  also be present but is not required."
+  also be present but is not required. The value of `:confidence` must be a number
+  in the range -1 to 1."
   [o]
   (and
     (proposition? o)
-    (every? #(o %) argument-keys)))
-
-;; (argument? {:verb :killed :subject :brutus :object :caesar}) ;; false, lacks :confidence, :authority
-;; (argument? {:verb :killed :subject :brutus :object :caesar :confidence 0.7 :authority :falco}) ;; true
-;; (argument? {:verb :killed
-;;             :subject {:id :brutus :name "Marcus Brutus"}
-;;             :object {:id :caesar :name "Gaius Julius Caesar" :wife :drusila}
-;;             :confidence 1
-;;             :authority :brutus}) ;; true
+    (every? #(o %) argument-keys)
+    (number? (:confidence o))
+    (<= -1 (:confidence o) 1)))
 
 (defn minimise
   "Expecting that `o` is a (potentially rich) proposition, return a map identical
@@ -143,7 +116,7 @@
         (keys o)))
     o))
 
-;; (proposition?
-;;   (minimise {:verb :killed
-;;              :subject {:id :brutus :name "Marcus Brutus"}
-;;              :object {:id :caesar :name "Gaius Julius Caesar" :wife :drusila}}))
+(proposition?
+  (minimise {:verb :kill
+             :subject {:id :brutus :name "Marcus Brutus"}
+             :object {:id :caesar :name "Gaius Julius Caesar" :wife :drusila}}))
