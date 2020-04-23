@@ -653,12 +653,7 @@ It appears that Achinstein's motivation in producing a new account has
 less to do with addressing these real world problems than with overcoming such
 philosophical puzzles as the Paradox of the Ravens; so his account takes
 us no nearer to providing a model which will support the construction of
-better common sense explanations. 5
-
-A \[ mh L/Go/w%\` \\
-
-\` Eegozi
-
+better common sense explanations.
 
 ## Toulmin
 
@@ -973,26 +968,26 @@ the explicandum onto the theory, or body of belief, which we currently hold.
 intend to draw on examples from two genuine debates, drawn in this instance from
 the development of the theory of evolution. These debates are
 
-The debate between Huxley and Kropotkin over whether co-operation or
+> The debate between [Huxley and Kropotkin](HuxleyKropotkin.html) over whether co-operation or
 competition was the more important factor in the survival of species.
 
-Kropotkin, a leading Anarchist, sought to show that human beings (among
+> > Kropotkin, a leading Anarchist, sought to show that human beings (among
 other animals) were inherently co-operative, and (implied conclusion)
 would get along fine in the absence of government. Huxley, a Tory,
 sought to show that, on the contrary, competition (and, implicitly, capitalism)
 red in tooth and claw was 'natural'.
 
-The debate between Bateson and Kammerer over whether acquired
+> The debate between [Bateson and Kammerer](BatesonKammerer.html) over whether acquired
 characteristics were inherited.
 
-Kammerer, then the only scientist capable of breeding many species of
+> > Kammerer, then the only scientist capable of breeding many species of
 amphibian in captivity, showed in a series of experiments that
 characteristics aquired by parents were inherited by their offspring.
 Bateson, in a series of increasingly virulent attacks, ultimately
-claimed that these experiments were fraudulent. As no-one else was even capable of
-breeding the creatures involved, they could not be repeated.
+claimed that these experiments were fraudulent. As no one else was even capable of
+breeding the creatures involved, the experiments could not be repeated.
 
-Kammerer was a communist, and the implicit argument behind his work
+> > Kammerer was a communist, and the implicit argument behind his work
 was that human beings were perfectable; that some parts of the benefits
 of humane education and culture would be transmitted. Bateson was again a
 Tory, though not as politically committed as the other figures discussed.

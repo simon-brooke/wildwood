@@ -1,6 +1,6 @@
 # Bialowieza
 
-{ this chapter is in active development }
+{ this chapter is in active development; quite a lot of the technical detail in this chapter at present will probably end up in [Implementing](Implementing.html), while additional high level and conceptual design, as it develops, will be here. }
 
 ## Why Bialowieza?
 
@@ -72,7 +72,7 @@ The attentive reader will note that some of the proposed privileged keys map clo
 * that `:truth` and `:confidence` are both `qualifiers` of the claim in the sense of the **Q** term;
 * that `:authority` is a form of `backing` in the sense of the **B** term.
 
-So what, then, is an 'argument structure', as described above? It seems to me that it may be exactly a proposition, with the special feature that the data is not minimised.
+So what, then, is an 'argument structure', as described above? It seems to me that it may be exactly a proposition, with the special feature that the value of the `:data` key is not minimised.
 
 #### Proposition minimisation
 
@@ -96,7 +96,7 @@ The object of building Bialowieza as a library is that we should not constrain h
 
 In Arboretum and later in KnacqTools, default values of features were determined by the 'knowledge engineer', normally by asking the domain expert, and were fixed for the knowledge base at all times. But these two programs each reasoned about one case at a time, and did not store knowledge about multiple cases.
 
-These systems could this be said to be *prejudiced*, to the extent that knowledge of the world acquired over time did not change their default judgements. Wildwood holds knowledge on potentially very many objects, and that knowledge may change dynamically over time, both as the world changes and as new things which already existed in the world become known.
+These systems could thus be said to be *prejudiced*, to the extent that knowledge of the world acquired over time did not change their default judgements. Wildwood holds knowledge on potentially very many objects, and that knowledge may change dynamically over time, both as the world changes and as new things which already existed in the world become known.
 
 Suppose we wish to decide the truth value of the proposition
 
