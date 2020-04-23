@@ -25,9 +25,8 @@
   side - be able to consume and emit natural language, but that functionality
   does not need to be part of the wildwood library, and certainly does
   not need to be part of the default advocate as specified here."
-  (:require [wildwood.knowledge-accessor :refer []]
+  (:require [wildwood.knowledge-accessor :refer [Accessor]]
             [wildwood.schema :refer [proposition? argument?]]))
-
 
 (defprotocol Advocate
   (record [self proposition value]

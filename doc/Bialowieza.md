@@ -68,3 +68,5 @@ This means that every implementation of the `wildwood.knowledge-accessor/Accesso
 ## Thoughts on the shape of a knowledge base
 
 The object of building Bialowieza as a library is that we should not constrain how applications which use the library store their knowledge. Rather, knowledge accessors must transduce between the representation used by the particular storage implementation and that defined in `wildwood.schema`. However, what we've described above suggests that a hierarchical database would be a very natural fit for knowlege base data - more natural, in this case, than a relational database.
+
+
