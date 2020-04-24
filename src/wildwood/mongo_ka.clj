@@ -38,7 +38,10 @@
         (assoc
           (dissoc record :_id)
           :id id))))
-  (store [_ id proposition]
+  (match [_ proposition]
+         ;; I know I've seen how to do this in the Mongo documentation...
+         )
+  (store [_ proposition]
          ;; don't really know how to do this and am too tired just now.
          ))
 

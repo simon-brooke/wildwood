@@ -57,6 +57,24 @@
   he had he must have had accomplices (Cassius and Longus, who clearly were
   accomplices and implicate one another), but honourable men don't kill with
   accomplices and Brutus is an honourable man.
+
+  ## Features
+
+  The `features` in DTree terms we're interested in to make these inferences are
+
+  * `did-kill` - true of an entity which is in the subject position of a `kill` proposition;
+  * `was-killed` - true of an entity which is in the object position of a `kill` proposition;
+  * `buried` - true of an entity which is in the object position of a `bury` proposition;
+  * `dead` - true of an entity of which either `was-killed` or `buried` is true;
+  * `honourable` - true of an entity, provided that `did-lie` and `did-murder` are false;
+  * `did-murder` - true of an entity x that `did-kill[x,y]` for some object y is true of,
+  provided that there exists some other entity p of whom `did-kill[p,x]` is also true,
+  or that `was-unarmed[y]` is true;
+  * `did-lie` - true of an entity which has offered a proposition which for other reasons we do not believe. Tricky. False by default and I think we probably leave it at that for now.
+  * `was-unarmed` - true of an entity at a time `t` if they were unarmed at the time.
+
+  Note that ALL of this is too complex for the simple DTree logic of the Arboretum /
+  KnacqTools generation. They could not unpack propositions as I'm proposing here.
   "
   (:require [wildwood.knowledge-accessor :refer [Accessor]]
             [wildwood.advocate :refer [Advocate]]))
