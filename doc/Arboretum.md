@@ -102,7 +102,7 @@ is true":
 
 ![Simplest possible DTree](../img/simplest-possible-dtree.svg)
 
-fig 3: simplest possible rule Conjunctions are represented by columns of
+fig 1: simplest possible rule Conjunctions are represented by columns of
 nodes, only the last of which has the colour to be returned if all are
 true and disjunctions by branches, each of which terminates in the
 colour to be returned if any are true. These can be combined in any
@@ -111,7 +111,7 @@ individual rule structures small. This is shown in the figure below:
 
 ![Example DTree](../img/example-dtree.svg)
 
-fig 4: example rule, showing syntax The rule would read: "(rootnode) is
+fig 2: example rule, showing syntax The rule would read: "(rootnode) is
 false unless (first conjunct) is true and (second conjunct) is true, in
 which case it is true unless either (first disjunct) or (second
 disjunct) is true".
@@ -262,11 +262,11 @@ our knowledge base contains the following rules:
 
 ![DTree for 'Entitled to Widows' Allowance](../img/dtree-widows-allowance.svg)
 
-fig 1: Rule for "Entitled to Widow's Allowance"
+fig 3: Rule for "Entitled to Widow's Allowance"
 
 ![DTree for Living with Partner](../img/dtree-live-with-partner.svg)
 
-fig 2: rule for "Living with Partner"
+fig 4: rule for "Living with Partner"
 
 which, together, partially encode
 the following legislation fragment, from the Social Security Act 1975

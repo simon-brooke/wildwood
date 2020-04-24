@@ -48,7 +48,7 @@ So we shall say that a proposition will be represented as a Clojure map with at 
 
 Thus
 
-    {:verb :killed :subject :brutus :object :caesar}
+    {:verb :kill :subject :brutus :object :caesar}
 
 is a proposition which asserts that Brutus killed Caesar.
 
@@ -61,36 +61,72 @@ There may be many other privileged keys, such as
 * `:data` - an argument structure...!
 * `:authority` - id of agent from whom, or rule from which, I know this;
 
-and so on. The exact set of privileged keys is probably actually a matter for particular advocates rather than for the engine itself, although if the advocates in the game don't broadly share the same set of privileged keys then it won't work very well.
+and so on. The exact set of privileged keys is probably actually a matter for
+particular advocates rather than for the engine itself, although if the advocates
+in the game don't broadly share the same set of privileged keys then it won't
+work very well.
 
 *However...*
 
-The attentive reader will note that some of the proposed privileged keys map closely onto the [Toulmin schema](Analysis.html#the-toulmin-schema). Thus we can say:
+The attentive reader will note that some of the proposed privileged keys map
+closely onto the [Toulmin schema](Analysis.html#the-toulmin-schema). Thus we can say:
 
 * that the proposition itself is a `claim` in the sense of the **C** term;
 * that `:data` above is precisely `data` in the sense of the **D** term in Toulmin's schema, but may (is likely to) also provide a `warrant` in the sense of the **W** term;
 * that `:truth` and `:confidence` are both `qualifiers` of the claim in the sense of the **Q** term;
 * that `:authority` is a form of `backing` in the sense of the **B** term.
 
-So what, then, is an 'argument structure', as described above? It seems to me that it may be exactly a proposition, with the special feature that the value of the `:data` key is not minimised.
+So what, then, is an 'argument structure', as described above? It seems to me
+that it may be exactly a proposition, with the special feature that the value
+of the `:data` key is not minimised.
+
+Recall that in the chapter on Arboretum I observed that [the working of the DTree decision algorithm caused precisely those nodes to be collected whose fragments which provided the most relevant explanation](Arboretum.html#relevance-filtering) to support the decision, in a natural sequence from the general to the particular. I believe that precisely the same fortuitous alchemy will provide the argument structure to provide Toulmin's **D** - out `:data` term. The DTree itself then becomes the **W** - the `:warrant`; and the author of the DTree becomes the `:authority`.
 
 #### Proposition minimisation
 
-How are the values of `:subject`, `:object` and so on to be passed? If we pass rich knowledge structures around, then we lose the insight that different advocates may know different things about given objects. Thus, while internally within each advocate's knowledge base objects may be stored with rich data, when they're passed around in propositions they should be minimised - that is to say, the value should just be a unique identifier, such that, for every object in the domain, if an advocate knows anything at all about that object, it knows its unique identifier and knows the object by that unique identifier.
+How are the values of `:subject`, `:object` and so on to be passed? If we pass
+rich knowledge structures around, then we lose the insight that different
+advocates may know different things about given objects. Thus, while internally
+within each advocate's knowledge base objects may be stored with rich data, when
+they're passed around in propositions they should be minimised - that is to say,
+the value should just be a unique identifier, such that, for every object in the
+domain, if an advocate knows anything at all about that object, it knows its
+unique identifier and knows the object by that unique identifier.
 
-Thus the unique identifier has something of the nature of a 'true name', in the magical sense. A given true name, a given unique identifier, refers to precisely one thing in the world, and provided that two advocates both know the same true name, they can debats propositions which refer to the object with that true name.
+Thus the unique identifier has something of the nature of a 'true name', in the
+magical sense. A given true name, a given unique identifier, refers to precisely
+one thing in the world, and provided that two advocates both know the same true
+name, they can debats propositions which refer to the object with that true name.
 
-Generally, a true name shall be a Clojure keyword. That keyword, passed to any advocate in the game, shall identify either `nil` (the advocate knows nothing of the object), or a map representing everything the advocate knows about the object, and within that map, the value of the key `:id` shall be that true name.
+Generally, a true name shall be a Clojure keyword. That keyword, passed to any
+advocate in the game, shall identify either `nil` (the advocate knows nothing
+of the object), or a map representing everything the advocate knows about the
+object, and within that map, the value of the key `:id` shall be that true name.
 
-But in saying 'the advocate knows', actually, the advocate knows nothing. The advocate has access to a knowledge base, and it is in the knowledge base that the knowledge is stored. It may be an individual knowledge base, in which case we can implement that idea that different advocates may have the different knowledge about the same object, or it may be a shared consensual knowledge base.
+But in saying 'the advocate knows', actually, the advocate knows nothing. The
+advocate has access to a knowledge base, and it is in the knowledge base that
+the knowledge is stored. It may be an individual knowledge base, in which case
+we can implement that idea that different advocates may have the different
+knowledge about the same object, or it may be a shared consensual knowledge
+base.
 
-A proposition is represented as a map. So to minimise a proposition, for every value in that map, if the value is itself a map it shall be replaced by the value of the key `:id` in that map.
+A proposition is represented as a map. So to minimise a proposition, for every
+value in that map, if the value is itself a map it shall be replaced by the
+value of the key `:id` in that map.
 
-This means that every implementation of the `wildwood.knowledge-accessor/Accessor` protocol must transduce whatever token its backing store uses as the primary key for an object to `:id` when it performs a `fetch` operation.
+This means that every implementation of the `wildwood.knowledge-accessor/Accessor`
+protocol must transduce whatever token its backing store uses as the primary key
+for an object to `:id` when it performs a `fetch` operation.
 
 ## Thoughts on the shape of a knowledge base
 
-The object of building Bialowieza as a library is that we should not constrain how applications which use the library store their knowledge. Rather, knowledge accessors must transduce between the representation used by the particular storage implementation and that defined in `wildwood.schema`. However, what we've described above suggests that a hierarchical database would be a very natural fit for knowlege base data - more natural, in this case, than a relational database.
+The object of building Bialowieza as a library is that we should not constrain
+how applications which use the library store their knowledge. Rather, knowledge
+accessors must transduce between the representation used by the particular
+storage implementation and that defined in `wildwood.schema`. However, what
+we've described above suggests that a hierarchical database would be a very
+natural fit for knowlege base data - more natural, in this case, than a
+relational database.
 
 ## Prejudice, and defaults
 

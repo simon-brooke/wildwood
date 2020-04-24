@@ -775,7 +775,7 @@ believe'); and, implicit in the qualifier, the possibility of a rebuttal:
 ![Argument schama after Toulmin, p 104](../img/toulmin-argument-schema.svg)
 
 In conversation, Toulmin argues, it may be natural simply to say
-'&lt;data&gt; so &lt;c|aim&gt;' ; to say '&lt;c|aim&gt; because &lt;warrant&gt; because
+'&lt;data&gt; so &lt;claim&gt;' ; to say '&lt;claim&gt; because &lt;warrant&gt; because
 &lt;data&gt;' "...strikes us as cumbrous and artificial, for it puts in an extra step which is trivial
 and unnecessary".
 

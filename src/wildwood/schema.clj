@@ -29,6 +29,11 @@
     :authority  ;; id of agent from whom, or rule from which, I know this.
     })
 
+(def preserved-keys
+  "Keys whose values should not be minimised during proposition minimisation"
+  ;; TODO: actually, this may end up being just :data
+  (set (cons :data argument-keys)))
+
 (defn proposition?
   "True if `o` qualifies as a proposition. A proposition is probably a map
   with some privileged keys, and may look something like a minimised
@@ -92,6 +97,8 @@
     (number? (:confidence o))
     (<= -1 (:confidence o) 1)))
 
+(set (cons :data argument-keys))
+
 (defn minimise
   "Expecting that `o` is a (potentially rich) proposition, return a map identical
   to `o` save that for each value `v` of key `k` in `o`, if `v` is a map and `k`
@@ -110,7 +117,7 @@
           {k
            (let [v (k o)]
              (if
-               (and (not (argument-keys k)) (map? v))
+               (and (not (preserved-keys k)) (map? v))
                (:id v)
                v))})
         (keys o)))
