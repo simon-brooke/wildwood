@@ -82,7 +82,67 @@ of the `:data` key is not minimised.
 
 Recall that in the chapter on Arboretum I observed that [the working of the DTree decision algorithm caused precisely those nodes to be collected whose fragments which provided the most relevant explanation](Arboretum.html#relevance-filtering) to support the decision, in a natural sequence from the general to the particular. I believe that precisely the same fortuitous alchemy will provide the argument structure to provide Toulmin's **D** - out `:data` term. The DTree itself then becomes the **W** - the `:warrant`; and the author of the DTree becomes the `:authority`.
 
+{ **TODO**: investigate how this notion of a proposition - and a Toulmin structure - relates to situation semantics; especially, consider how locating a proposition in time and space captures the notion of a situation. }
+
+#### Are located two-position propositions sufficient?
+
+Aristotle's propositions are essentially two position: they describe a relationship between two entities, a subject and an object. But they're not located.
+
+Thus:
+
+* Socrates is a man
+
+Tells us that Socrates is always, and everywhere, a man. If Socrates led a double life - if, perhaps, when in Lesbos, he lived as a woman - this simple proposition cannot capture the fact. Let's draw another example, to make clear.
+
+* Brutus killed Caesar
+
+tells us that, and only that, Brutus killed Caesar. It doesn't allow us to say how Brutus killed Caesar. If we then say
+
+* Brutus used Dagger<sub>1</sub>
+
+It still doesn't help, because we don't know how these two propositions relate to one another. Brutus could indeed have used this particular dagger at some time, it might well be the dagger that kille Caesar, but there's no smoking gun.
+
+But if we say
+
+1. Brutus killed Caesar in the Forum on the Ides of March
+2. Brutus used Dagger<sub>1</sub> in the Forum on the Ides of March
+3. Dagger<sub>1</sub> caused Wound<sub>1</sub> in the Forum on the Ides of March
+4. Caesar died of Wound<sub>1</sub> in the Forum on the Ides of March
+
+then provided the atomicity of our notions of time and space is sufficiently fine, we're getting pretty close.
+
+Adding a notion of location to propositions leads to the notion of an event, a small bundle or ball of time and space which gives them context; and we can reason with this.
+
+The reason I like the idea of investigating whether located two position propositions are sufficient is that a very regular knowlege representation is easy to compute over. The reason I think it might not be is this:
+
+Suppose Calpurnia told Drusilla that Brutus killed Caesar in the Forum on the Ides of March. For simplicity, let's call
+
+* Brutus killed Caesar in the Forum on the Ides of March.
+
+'Proposition<sub>1</sub>', or 'P<sub>1</sub>' for short. What is the warrant for believing P<sub>1</sub>? Well, it's that Calpurnia told Drusilla (and presumably, that Drusilla has now told us).
+
+So we have a notional event E<sub>1</sub> such that
+
+* P<sub>1</sub> := 'Brutus killed Caesar in the Forum on the Ides of March.'
+* P<sub>2</sub> := 'Calpurnia uttered P<sub>1</sub> at E<sub>1</sub>.'
+* P<sub>3</sub> := 'Drusilla heard P<sub>1</sub> at E<sub>1</sub>.'
+
+And the warrant for the belief that P<sub>1</sub> is the conjunction of P<sub>2</sub> and P<sub>3</sub>.
+
+Writing it down like that, it kind of works, but I'm not yet wholly persuaded. It feels clumsy.
+
+As an exercise for the reader, how would we represent 'Dirck, Joris and I carried the good news from Ghent to Aix' using only located two position propositions? It feels, as I said, clumsy.
+
+There is, of course, also a lurking combinatorial explosion here. If for each proposition which is learned, two further propositions must be learned as warrant for the first proposition, the world blows up. In an ideal platonic world we may indeed have turtles all the way down, but in a finite machine we need to say, arbitrarily but ruthlessly, that some classes of proposition will be stored unwarranted.
+
+#### Learning, consistency and confidence
+
+{ **TODO**: if we receive a new proposition which confirms a proposition we already know, our confidence in both increases. If we learn a new one which contradicts one we already know, our confidence in both decreases. Expand!
+}
+
 #### Proposition minimisation
+
+{ **TODO**: probably lose this. I increasingly think that, whatever the internal representation of the proposition within the advocate or knowledge base, the proposition as passed around must *always* be minimised. This is, in any case, very much an implementation detail. }
 
 How are the values of `:subject`, `:object` and so on to be passed? If we pass
 rich knowledge structures around, then we lose the insight that different

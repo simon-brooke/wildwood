@@ -52,7 +52,51 @@
 </ul>
 <p>So what, then, is an ‘argument structure’, as described above? It seems to me that it may be exactly a proposition, with the special feature that the value of the <code>:data</code> key is not minimised.</p>
 <p>Recall that in the chapter on Arboretum I observed that <a href="Arboretum.html#relevance-filtering">the working of the DTree decision algorithm caused precisely those nodes to be collected whose fragments which provided the most relevant explanation</a> to support the decision, in a natural sequence from the general to the particular. I believe that precisely the same fortuitous alchemy will provide the argument structure to provide Toulmin’s <strong>D</strong> - out <code>:data</code> term. The DTree itself then becomes the <strong>W</strong> - the <code>:warrant</code>; and the author of the DTree becomes the <code>:authority</code>.</p>
+<p>{ <strong>TODO</strong>: investigate how this notion of a proposition - and a Toulmin structure - relates to situation semantics; especially, consider how locating a proposition in time and space captures the notion of a situation. }</p>
+<h4><a href="#are-located-two-position-propositions-sufficient-" name="are-located-two-position-propositions-sufficient-"></a>Are located two-position propositions sufficient?</h4>
+<p>Aristotle’s propositions are essentially two position: they describe a relationship between two entities, a subject and an object. But they’re not located.</p>
+<p>Thus:</p>
+<ul>
+  <li>Socrates is a man</li>
+</ul>
+<p>Tells us that Socrates is always, and everywhere, a man. If Socrates led a double life - if, perhaps, when in Lesbos, he lived as a woman - this simple proposition cannot capture the fact. Let’s draw another example, to make clear.</p>
+<ul>
+  <li>Brutus killed Caesar</li>
+</ul>
+<p>tells us that, and only that, Brutus killed Caesar. It doesn’t allow us to say how Brutus killed Caesar. If we then say</p>
+<ul>
+  <li>Brutus used Dagger<sub>1</sub></li>
+</ul>
+<p>It still doesn’t help, because we don’t know how these two propositions relate to one another. Brutus could indeed have used this particular dagger at some time, it might well be the dagger that kille Caesar, but there’s no smoking gun.</p>
+<p>But if we say</p>
+<ol>
+  <li>Brutus killed Caesar in the Forum on the Ides of March</li>
+  <li>Brutus used Dagger<sub>1</sub> in the Forum on the Ides of March</li>
+  <li>Dagger<sub>1</sub> caused Wound<sub>1</sub> in the Forum on the Ides of March</li>
+  <li>Caesar died of Wound<sub>1</sub> in the Forum on the Ides of March</li>
+</ol>
+<p>then provided the atomicity of our notions of time and space is sufficiently fine, we’re getting pretty close.</p>
+<p>Adding a notion of location to propositions leads to the notion of an event, a small bundle or ball of time and space which gives them context; and we can reason with this.</p>
+<p>The reason I like the idea of investigating whether located two position propositions are sufficient is that a very regular knowlege representation is easy to compute over. The reason I think it might not be is this:</p>
+<p>Suppose Calpurnia told Drusilla that Brutus killed Caesar in the Forum on the Ides of March. For simplicity, let’s call</p>
+<ul>
+  <li>Brutus killed Caesar in the Forum on the Ides of March.</li>
+</ul>
+<p>‘Proposition<sub>1</sub>’, or ‘P<sub>1</sub>’ for short. What is the warrant for believing P<sub>1</sub>? Well, it’s that Calpurnia told Drusilla (and presumably, that Drusilla has now told us).</p>
+<p>So we have a notional event E<sub>1</sub> such that</p>
+<ul>
+  <li>P<sub>1</sub> := ‘Brutus killed Caesar in the Forum on the Ides of March.’</li>
+  <li>P<sub>2</sub> := ‘Calpurnia uttered P<sub>1</sub> at E<sub>1</sub>.’</li>
+  <li>P<sub>3</sub> := ‘Drusilla heard P<sub>1</sub> at E<sub>1</sub>.’</li>
+</ul>
+<p>And the warrant for the belief that P<sub>1</sub> is the conjunction of P<sub>2</sub> and P<sub>3</sub>.</p>
+<p>Writing it down like that, it kind of works, but I’m not yet wholly persuaded. It feels clumsy.</p>
+<p>As an exercise for the reader, how would we represent ‘Dirck, Joris and I carried the good news from Ghent to Aix’ using only located two position propositions? It feels, as I said, clumsy.</p>
+<p>There is, of course, also a lurking combinatorial explosion here. If for each proposition which is learned, two further propositions must be learned as warrant for the first proposition, the world blows up. In an ideal platonic world we may indeed have turtles all the way down, but in a finite machine we need to say, arbitrarily but ruthlessly, that some classes of proposition will be stored unwarranted.</p>
+<h4><a href="#learning-consistency-and-confidence" name="learning-consistency-and-confidence"></a>Learning, consistency and confidence</h4>
+<p>{ <strong>TODO</strong>: if we receive a new proposition which confirms a proposition we already know, our confidence in both increases. If we learn a new one which contradicts one we already know, our confidence in both decreases. Expand! }</p>
 <h4><a href="#proposition-minimisation" name="proposition-minimisation"></a>Proposition minimisation</h4>
+<p>{ <strong>TODO</strong>: probably lose this. I increasingly think that, whatever the internal representation of the proposition within the advocate or knowledge base, the proposition as passed around must <em>always</em> be minimised. This is, in any case, very much an implementation detail. }</p>
 <p>How are the values of <code>:subject</code>, <code>:object</code> and so on to be passed? If we pass rich knowledge structures around, then we lose the insight that different advocates may know different things about given objects. Thus, while internally within each advocate’s knowledge base objects may be stored with rich data, when they’re passed around in propositions they should be minimised - that is to say, the value should just be a unique identifier, such that, for every object in the domain, if an advocate knows anything at all about that object, it knows its unique identifier and knows the object by that unique identifier.</p>
 <p>Thus the unique identifier has something of the nature of a ‘true name’, in the magical sense. A given true name, a given unique identifier, refers to precisely one thing in the world, and provided that two advocates both know the same true name, they can debats propositions which refer to the object with that true name.</p>
 <p>Generally, a true name shall be a Clojure keyword. That keyword, passed to any advocate in the game, shall identify either <code>nil</code> (the advocate knows nothing of the object), or a map representing everything the advocate knows about the object, and within that map, the value of the key <code>:id</code> shall be that true name.</p>
