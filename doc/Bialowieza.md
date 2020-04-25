@@ -10,23 +10,50 @@ Bialowieza is the second iteration of the Wildwood engine, and this following co
 
 The current motivation for restarting work on Wildwood is to provide non-player characters in a game world with sufficient intelligence that they can enter into meaningful unscripted conversations about objects and events in that world.
 
-## Major components of Bialowieza
+## Knowledge representation
 
-### Knowledge Accessors
+It's my intention that knowledge will be represented in Bialowieza not as Features, as were used in Arboretum, but as propositions, and in this section I intend to state what I mean by a proposition.
 
-The `wildwood.knowledge-accessor/Accessor` protocol defines a bidirectional transducer which can fetch data from whatever storage representation the calling application uses into the representation defined by `wildwood.schema`.
+### On propositional and predicate calculi
 
-### Advocates
+But firstly I should be clear that Bialowieza does *not* represent a propositional calculus. On the contrary, Arboretum, which dealt with features, is a propositional calculus. How so?
 
-The `wildwood.advocate/Advocate` protocol describes an agent which can take part in decision processes.
+A feature, in Arboretum, was a one-position predicate; an example would be, 'is a widow'. Propositions were (in effect) constructed by applying that predicate to the case. Thus, suppose we were considering the case of someone called Calpurnia, the feature 'is a widow' expands to the proposition 'Calpurnia is a widow'; and this proposition is, to Arboretum, atomic.
 
-### The engine itself
+Thus Arboretum can reason about whether Calpurnia is a widow. It can have a rule (and indeed, did have a rule) which says
 
-The engine is implemented by the namespace `wildwood.bialowieza`.
+    if
+      is a woman, and
+      has been married, and
+      husband is dead
+    then
+      is a widow
+    unless
+      was divorced, or
+      has remarried.
 
-### Inference processes
+The features are given as predicates, because all must apply to the same subject; expanding them to propositions gives us, in this case
 
-Advocates are entitled to use whatever inference processes they like, but they have access to `wildwood.dengine`, which is an implementation of the DTree engine described in the chapter on [Arboretum](Arboretum.html) adapted to propositions as defined in `wildwood.schema`.
+    if
+      Calpurnia is a woman, and
+      Calpurnia has been married, and
+      Calpurnia's husband is dead
+    then
+      Calpurnia is a widow
+    unless
+      Calpurnia was divorced, or
+      Calpurnia has remarried.
+
+However, another proposition about a claimant that might have been been interesting to an adjudicating officer might be 'is a widowed mother'. One might define that in common sense terms as
+
+    if
+      Calpurnia is a widow, and
+      there exists some person whose mother is Calpurnia, and
+      that person is still a child
+    then
+      Calpurnia is a widowed mother
+
+
 
 ### Propositions
 
@@ -84,7 +111,7 @@ Recall that in the chapter on Arboretum I observed that [the working of the DTre
 
 { **TODO**: investigate how this notion of a proposition - and a Toulmin structure - relates to situation semantics; especially, consider how locating a proposition in time and space captures the notion of a situation. }
 
-#### Are located two-position propositions sufficient?
+### The located proposition
 
 Aristotle's propositions are essentially two position: they describe a relationship between two entities, a subject and an object. But they're not located.
 
@@ -109,9 +136,11 @@ But if we say
 3. Dagger<sub>1</sub> caused Wound<sub>1</sub> in the Forum on the Ides of March
 4. Caesar died of Wound<sub>1</sub> in the Forum on the Ides of March
 
-then provided the atomicity of our notions of time and space is sufficiently fine, we're getting pretty close.
+then provided the atomicity of our notions of time and space is sufficiently fine, we're getting pretty close. Adding a notion of location to propositions leads to the notion of an event, a small bundle or ball of time and space which gives them context; and we can reason with this.
 
-Adding a notion of location to propositions leads to the notion of an event, a small bundle or ball of time and space which gives them context; and we can reason with this.
+The size of an event is, of course, a slightly slippery notion. The inference that Caesar died (at least partly) from the blow struck by Brutus is only possible if the envelope of the event is fairly small - no more than a few metres, no more than a few minutes. But if we replace Dagger<sub>1</sub> with Rifle<sub>1</sub> then the spatial extent of the event can be considerable expanded; and if it's LandMine<sub>1</sub>, then the temporal aspect similarly so.
+
+### Are located two-position propositions sufficient?
 
 The reason I like the idea of investigating whether located two position propositions are sufficient is that a very regular knowlege representation is easy to compute over. The reason I think it might not be is this:
 
@@ -133,12 +162,113 @@ Writing it down like that, it kind of works, but I'm not yet wholly persuaded. I
 
 As an exercise for the reader, how would we represent 'Dirck, Joris and I carried the good news from Ghent to Aix' using only located two position propositions? It feels, as I said, clumsy.
 
-There is, of course, also a lurking combinatorial explosion here. If for each proposition which is learned, two further propositions must be learned as warrant for the first proposition, the world blows up. In an ideal platonic world we may indeed have turtles all the way down, but in a finite machine we need to say, arbitrarily but ruthlessly, that some classes of proposition will be stored unwarranted.
+There is, of course, also a lurking combinatorial explosion here. If for each proposition which is learned, two further propositions must be learned as warrant for the first proposition, the world blows up. In an ideal platonic universe we may indeed have turtles all the way down, but in a finite machine we need to say, arbitrarily but ruthlessly, that some classes of proposition will be stored unwarranted.
 
-#### Learning, consistency and confidence
+### The event is (like) a situation
 
-{ **TODO**: if we receive a new proposition which confirms a proposition we already know, our confidence in both increases. If we learn a new one which contradicts one we already know, our confidence in both decreases. Expand!
-}
+I would draw the reader's attention, here, to the similarity between the notion of an event, discussed above, and the [notion of a situation](Analysis.html#towards-a-situation-semantic-account-of-explanation), as discussed by Barwise & Perry. In particular, I'd like to draw attention to similarity between the account I've given of how Drusilla's belief that Brutus killed Caesar is warranted by
+
+* P<sub>2</sub> := 'Calpurnia uttered P<sub>1</sub> at E<sub>1</sub>.'
+* P<sub>3</sub> := 'Drusilla heard P<sub>1</sub> at E<sub>1</sub>.'
+
+and the account of explanation as a situation E defined:
+
+    E := at I1: understands, a, c; no
+        understands, b, c; yes
+        enquirlng, a; yes
+        addressing, a, b; yes
+        saying, a, q; yes
+        subject, q, c; yes
+
+      at I2: responding, b, q; yes
+        addressing, b, a; yes
+        saying, b, u; yes
+        subject, u, c; yes
+
+      at I3: understands, a, c; yes
+        understands, b, c; yes
+
+      I1 < I2 < I3
+
+where: a, b are some actors; c is some concept; q, u are some
+utterances.
+
+Explicitly:
+
+* Drusilla => **a**
+* Calpurnia => **b**
+* P<sub>1</sub> => **c**
+* E<sub>1</sub> => **I2**
+
+I'd argue that these are clearly very similar.
+
+My schema does not specify that "at I1: ... understands, a, c; no", but there's a reason for that.
+
+### Learning, consistency and confidence
+
+Let us suppose that Drusilla already knows the proposition that
+
+* Brutus killed Caesar in Rome in March.
+
+Calpurnia now tells her that
+
+* Brutus killed Caesar in the Forum on the Ides of March.
+
+The two accounts are compatible; this compatibility migh be represented, if you choose, by two further  propositions:
+
+* P<sub>4</sub> The Forum is within Rome.
+* P<sub>5</sub> The Ides of March is within March.
+
+Philosophers, after Plato, very often argue as though they inhabited ideal universes in which every agent always tells the truth, but the real world is not like that. For any person, there are few other people that that person trusts implicitly. The very notion that we need a warrant for a belief is an explicit recognition of the fact that knowledge is imperfect.
+
+So (unless she witnessed it herself, in which case you'd expect her to have more precise information), Drusilla does not *know*, in a strong sense, that Brutus killed Caesar in Rome in March. She has some degree of confidence in that proposition, which is likely to be less than perfect.
+
+When she learns from Calpurnia that Brutus killed Caesar in the Forum on the Ides of March, because the two claims are compatible, her confidence in each is likely to increase.
+
+By contrast, if Falco then says 'No, I heard from Gaius that it happened in April', then that casts doubt on both the first two claims - but also on this new claim. Because the claims are not compatible, they can't all be right.
+
+For the time being, I'm going to leave the issue of how confidence is derived and adjusted as an implementation detail; I don't - yet, at any rate - have an account of how this should work that I can defend. However, there's one further significant point to make about propositions before we move on.
+
+### On the subtext of propositions
+
+Propositions are not atomic. They do not come single spies, but freighted
+with battalions of inferable subtexts. Suppose Calpurnia says
+
+* Brutus killed Caesar in Rome during the ides of March
+
+I learn more than just that 'Brutus killed Caesar in Rome during the
+ides of March'. I also learn that
+
+* Brutus is a killer
+* Caesar has been killed
+* Rome is a place where killings happen
+* The Ides of March are a time to be extra cautious
+
+Suppose Cassius now says
+
+* Longus killed Caesar in Rome during the ides of March
+
+this may cast some doubt on Calpurnia's primary claim, and on the belief that
+Brutus is a killer. It doesn't rule it out - the accounts are compatible - but it
+certainly doesn't confirm it. However it does reinforce the beliefs that
+
+* Caesar has been killed
+* Rome is a place where killings happen
+* The ides of March are a time to be extra cautious.
+
+If Falco then says
+
+* No, I heard from Gaius that it happened in April
+
+the beliefs that
+
+* Caesar has been killed
+* Rome is a place where killings happen
+
+are still further strengthened.
+
+In proposing a formalism to express propositions, we need to consider how
+it allows this freight to be unpacked.
 
 #### Proposition minimisation
 
@@ -177,6 +307,24 @@ value of the key `:id` in that map.
 This means that every implementation of the `wildwood.knowledge-accessor/Accessor`
 protocol must transduce whatever token its backing store uses as the primary key
 for an object to `:id` when it performs a `fetch` operation.
+
+## Major components of Bialowieza
+
+### Knowledge Accessors
+
+The `wildwood.knowledge-accessor/Accessor` protocol defines a bidirectional transducer which can fetch data from whatever storage representation the calling application uses into the representation defined by `wildwood.schema`.
+
+### Advocates
+
+The `wildwood.advocate/Advocate` protocol describes an agent which can take part in decision processes.
+
+### The engine itself
+
+The engine is implemented by the namespace `wildwood.bialowieza`.
+
+### Inference processes
+
+Advocates are entitled to use whatever inference processes they like, but they have access to `wildwood.dengine`, which is an implementation of the DTree engine described in the chapter on [Arboretum](Arboretum.html) adapted to propositions as defined in `wildwood.schema`.
 
 ## Thoughts on the shape of a knowledge base
 
