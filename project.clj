@@ -3,7 +3,7 @@
   :codox {:metadata {:doc "**TODO**: write docs"
                      :doc/format :markdown}
           :output-path "docs/codox"
-          :source-uri "https://github.com/simon-brooke/the-great-game/blob/master/{filepath}#L{line}"}
+          :source-uri "https://github.com/simon-brooke/wildwood/blob/master/{filepath}#L{line}"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/math.numeric-tower "0.0.4"]
                  [com.taoensso/timbre "4.10.0"]
