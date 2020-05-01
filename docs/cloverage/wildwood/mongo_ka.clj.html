@@ -1,0 +1,149 @@
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../coverage.css"/>  <title> wildwood/mongo_ka.clj </title>
+ </head>
+ <body>
+<span class="covered" title="1 out of 1 forms covered">
+                001&nbsp;&nbsp;(ns&nbsp;wildwood.mongo-ka
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                002&nbsp;&nbsp;&nbsp;&nbsp;&quot;A&nbsp;knowledge&nbsp;accessor&nbsp;fetching&nbsp;from&nbsp;and&nbsp;storing&nbsp;to&nbsp;Mongo&nbsp;DB.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                003&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                004&nbsp;&nbsp;&nbsp;&nbsp;Hierarchical&nbsp;databases&nbsp;seem&nbsp;a&nbsp;very&nbsp;natural&nbsp;fit&nbsp;for&nbsp;how&nbsp;we&#x27;re&nbsp;storing
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                005&nbsp;&nbsp;&nbsp;&nbsp;knowledge.&nbsp;Mongo&nbsp;DB&nbsp;seems&nbsp;a&nbsp;particularly&nbsp;natural&nbsp;fit&nbsp;since&nbsp;its
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                006&nbsp;&nbsp;&nbsp;&nbsp;internal&nbsp;representation&nbsp;is&nbsp;JSON,&nbsp;which&nbsp;can&nbsp;be&nbsp;transformed&nbsp;to&nbsp;EDN
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                007&nbsp;&nbsp;&nbsp;&nbsp;extremely&nbsp;naturally.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                008&nbsp;&nbsp;&nbsp;&nbsp;(:require&nbsp;[monger.core&nbsp;:as&nbsp;mg]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                009&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[monger.collection&nbsp;:as&nbsp;mc]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                010&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[wildwood.knowledge-accessor&nbsp;:refer&nbsp;[Accessor]])
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                011&nbsp;&nbsp;&nbsp;&nbsp;(:import&nbsp;[com.mongodb&nbsp;MongoOptions&nbsp;ServerAddress]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[com.mongodb&nbsp;DB&nbsp;WriteConcern]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[org.bson.types&nbsp;ObjectId]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                014&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                015&nbsp;&nbsp;;;&nbsp;MongoDB&nbsp;data&nbsp;items&nbsp;are&nbsp;identified&nbsp;by&nbsp;ObjectId&nbsp;objects.&nbsp;In&nbsp;the&nbsp;retrieved
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                016&nbsp;&nbsp;;;&nbsp;record&nbsp;from&nbsp;MongoDB,&nbsp;key&nbsp;value&nbsp;is&nbsp;the&nbsp;value&nbsp;of&nbsp;a&nbsp;keyword&nbsp;`:_id`&nbsp;I&nbsp;don&#x27;t
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                017&nbsp;&nbsp;;;&nbsp;think&nbsp;there&#x27;s&nbsp;any&nbsp;*in&nbsp;principle*&nbsp;reason&nbsp;why&nbsp;we&nbsp;should&nbsp;not&nbsp;use&nbsp;these&nbsp;objects
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                018&nbsp;&nbsp;;;&nbsp;as&nbsp;key&nbsp;values&nbsp;-&nbsp;they&#x27;re&nbsp;presumably&nbsp;designed&nbsp;to&nbsp;be&nbsp;globally&nbsp;unique.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                019&nbsp;&nbsp;;;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                020&nbsp;&nbsp;;;&nbsp;In&nbsp;which&nbsp;case,&nbsp;on&nbsp;the&nbsp;way&nbsp;down&nbsp;we&nbsp;have&nbsp;to&nbsp;set&nbsp;`:_id`&nbsp;to&nbsp;the&nbsp;value&nbsp;of&nbsp;`:id`
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                021&nbsp;&nbsp;;;&nbsp;and&nbsp;vice&nbsp;versa&nbsp;on&nbsp;the&nbsp;way&nbsp;back&nbsp;up.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                022&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                023&nbsp;&nbsp;(defrecord&nbsp;MongoKA
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                024&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;It&#x27;s&nbsp;not&nbsp;clear&nbsp;to&nbsp;me&nbsp;whether&nbsp;we&nbsp;need&nbsp;to&nbsp;pass&nbsp;both&nbsp;the&nbsp;connection&nbsp;and&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                025&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;database&nbsp;in&nbsp;-&nbsp;it&#x27;s&nbsp;possible&nbsp;that&nbsp;the&nbsp;connected&nbsp;database&nbsp;handle&nbsp;is
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                026&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;sufficient.&nbsp;The&nbsp;value&nbsp;of&nbsp;`:collection`&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;collection
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                027&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;within&nbsp;the&nbsp;database&nbsp;to&nbsp;which&nbsp;this&nbsp;accessor&nbsp;writes.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                028&nbsp;&nbsp;&nbsp;&nbsp;[connection&nbsp;db&nbsp;^String&nbsp;collection]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                029&nbsp;&nbsp;&nbsp;&nbsp;Accessor
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                030&nbsp;&nbsp;&nbsp;&nbsp;(fetch
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                031&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_&nbsp;id]
+                </span><br/>
+<span class="not-covered" title="0 out of 5 forms covered">
+                032&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let&nbsp;[oid&nbsp;(cond
+                </span><br/>
+<span class="not-covered" title="0 out of 5 forms covered">
+                033&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(instance?&nbsp;ObjectId&nbsp;id)&nbsp;id
+                </span><br/>
+<span class="not-covered" title="0 out of 5 forms covered">
+                034&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(string?&nbsp;id)&nbsp;(ObjectId.&nbsp;id)
+                </span><br/>
+<span class="not-covered" title="0 out of 7 forms covered">
+                035&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(keyword?&nbsp;id)&nbsp;(ObjectId.&nbsp;(name&nbsp;id)))
+                </span><br/>
+<span class="not-covered" title="0 out of 5 forms covered">
+                036&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;record&nbsp;(mc&#x2F;find-by-id&nbsp;db&nbsp;collection&nbsp;oid)]
+                </span><br/>
+<span class="not-covered" title="0 out of 3 forms covered">
+                037&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(when&nbsp;record
+                </span><br/>
+<span class="not-covered" title="0 out of 3 forms covered">
+                038&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(assoc
+                </span><br/>
+<span class="not-covered" title="0 out of 4 forms covered">
+                039&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dissoc&nbsp;record&nbsp;:_id)
+                </span><br/>
+<span class="not-covered" title="0 out of 1 forms covered">
+                040&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:id&nbsp;id))))
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                041&nbsp;&nbsp;&nbsp;&nbsp;(match&nbsp;[_&nbsp;proposition]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                042&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;I&nbsp;know&nbsp;I&#x27;ve&nbsp;seen&nbsp;how&nbsp;to&nbsp;do&nbsp;this&nbsp;in&nbsp;the&nbsp;Mongo&nbsp;documentation...
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                043&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                044&nbsp;&nbsp;&nbsp;&nbsp;(store&nbsp;[_&nbsp;proposition]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                045&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;don&#x27;t&nbsp;really&nbsp;know&nbsp;how&nbsp;to&nbsp;do&nbsp;this&nbsp;and&nbsp;am&nbsp;too&nbsp;tired&nbsp;just&nbsp;now.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                046&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                047&nbsp;&nbsp;
+                </span><br/>
+ </body>
+</html>

@@ -1,0 +1,149 @@
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../coverage.css"/>  <title> wildwood/advocate.clj </title>
+ </head>
+ <body>
+<span class="covered" title="1 out of 1 forms covered">
+                001&nbsp;&nbsp;(ns&nbsp;wildwood.advocate
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                002&nbsp;&nbsp;&nbsp;&nbsp;&quot;An&nbsp;agent&nbsp;capable&nbsp;of&nbsp;playing&nbsp;the&nbsp;explanation&nbsp;game.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                003&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                004&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;advocate&nbsp;must&nbsp;have&nbsp;its&nbsp;own&nbsp;knowledge&nbsp;accessor.&nbsp;Different&nbsp;advocates
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                005&nbsp;&nbsp;&nbsp;&nbsp;within&nbsp;a&nbsp;game&nbsp;may&nbsp;be&nbsp;accessing&nbsp;different&nbsp;knowledge&nbsp;bases,&nbsp;or&nbsp;different
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                006&nbsp;&nbsp;&nbsp;&nbsp;subsets&nbsp;of&nbsp;the&nbsp;same&nbsp;knowledge&nbsp;base&nbsp;with&nbsp;different&nbsp;-&nbsp;potentially&nbsp;competing
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                007&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;knowledge.&nbsp;It&nbsp;also&nbsp;needs&nbsp;to&nbsp;know&nbsp;the&nbsp;schema&nbsp;in&nbsp;which&nbsp;knowledge&nbsp;will&nbsp;be
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                008&nbsp;&nbsp;&nbsp;&nbsp;presented.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                009&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                010&nbsp;&nbsp;&nbsp;&nbsp;Since&nbsp;the&nbsp;mechanism&nbsp;by&nbsp;which&nbsp;the&nbsp;application&nbsp;will&nbsp;communicate&nbsp;with&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                011&nbsp;&nbsp;&nbsp;&nbsp;library&nbsp;must&nbsp;include&nbsp;a&nbsp;way&nbsp;for&nbsp;users&nbsp;to&nbsp;interact&nbsp;with&nbsp;the&nbsp;game,&nbsp;and
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                012&nbsp;&nbsp;&nbsp;&nbsp;since&nbsp;the&nbsp;role&nbsp;of&nbsp;the&nbsp;user&nbsp;in&nbsp;the&nbsp;came&nbsp;is&nbsp;just&nbsp;as&nbsp;a&nbsp;participant,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                013&nbsp;&nbsp;&nbsp;&nbsp;advocate&nbsp;must&nbsp;be&nbsp;defined&nbsp;as&nbsp;a&nbsp;protocol,&nbsp;in&nbsp;order&nbsp;that&nbsp;it&nbsp;may&nbsp;be&nbsp;extended
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                014&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;code&nbsp;within&nbsp;the&nbsp;application&nbsp;which&nbsp;is&nbsp;passed&nbsp;in&nbsp;to&nbsp;the&nbsp;game&nbsp;when&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                015&nbsp;&nbsp;&nbsp;&nbsp;game&nbsp;is&nbsp;started.&nbsp;Indeed,&nbsp;multiple&nbsp;agents&nbsp;-&nbsp;the&nbsp;user(s)&nbsp;and&nbsp;potentially
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                016&nbsp;&nbsp;&nbsp;&nbsp;non-player&nbsp;characters&nbsp;-&nbsp;may&nbsp;be&nbsp;passed&nbsp;in.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                017&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                018&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;this&nbsp;conception,&nbsp;nothing&nbsp;within&nbsp;a&nbsp;default&nbsp;advocate&nbsp;has&nbsp;to&nbsp;be&nbsp;able&nbsp;to
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                019&nbsp;&nbsp;&nbsp;&nbsp;produce&nbsp;or&nbsp;consume&nbsp;natural&nbsp;language.&nbsp;It&nbsp;is&nbsp;sufficient&nbsp;for&nbsp;the&nbsp;API&nbsp;exposed
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                020&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;wildwood.advocate&nbsp;to&nbsp;receive&nbsp;and&nbsp;return&nbsp;wildwood.schema&nbsp;objects.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                021&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                022&nbsp;&nbsp;&nbsp;&nbsp;Obviously&nbsp;to&nbsp;show&nbsp;a&nbsp;user&nbsp;interface&nbsp;anything&nbsp;similar&nbsp;to&nbsp;Arden&#x27;s,&nbsp;or&nbsp;for
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                023&nbsp;&nbsp;&nbsp;&nbsp;what&nbsp;I&nbsp;intend&nbsp;for&nbsp;The&nbsp;Great&nbsp;Game,&nbsp;the&nbsp;advocates&nbsp;passed&nbsp;must&nbsp;&#x27;at&nbsp;their
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                024&nbsp;&nbsp;&nbsp;&nbsp;other&nbsp;end&#x27;&nbsp;-&nbsp;that&nbsp;is,&nbsp;on&nbsp;the&nbsp;application&nbsp;side&nbsp;rather&nbsp;than&nbsp;the&nbsp;library
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                025&nbsp;&nbsp;&nbsp;&nbsp;side&nbsp;-&nbsp;be&nbsp;able&nbsp;to&nbsp;consume&nbsp;and&nbsp;emit&nbsp;natural&nbsp;language,&nbsp;but&nbsp;that&nbsp;functionality
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                026&nbsp;&nbsp;&nbsp;&nbsp;does&nbsp;not&nbsp;need&nbsp;to&nbsp;be&nbsp;part&nbsp;of&nbsp;the&nbsp;wildwood&nbsp;library,&nbsp;and&nbsp;certainly&nbsp;does
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                027&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;need&nbsp;to&nbsp;be&nbsp;part&nbsp;of&nbsp;the&nbsp;default&nbsp;advocate&nbsp;as&nbsp;specified&nbsp;here.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                028&nbsp;&nbsp;&nbsp;&nbsp;(:require&nbsp;[wildwood.knowledge-accessor&nbsp;:refer&nbsp;[Accessor]]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                029&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[wildwood.schema&nbsp;:refer&nbsp;[proposition?&nbsp;argument?]]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                030&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                031&nbsp;&nbsp;(defprotocol&nbsp;Advocate
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                032&nbsp;&nbsp;&nbsp;&nbsp;(record&nbsp;[self&nbsp;proposition&nbsp;value]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                033&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Pass&nbsp;a&nbsp;`proposition`&nbsp;with&nbsp;a&nbsp;determined&nbsp;`value`&nbsp;to&nbsp;me,&nbsp;in&nbsp;order&nbsp;that
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                034&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advocates&nbsp;can,&nbsp;if&nbsp;desired,&nbsp;record&nbsp;the&nbsp;determined&nbsp;value&nbsp;in&nbsp;their
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                035&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knowledge&nbsp;base.&nbsp;The&nbsp;API&nbsp;does&nbsp;not&nbsp;require&nbsp;that&nbsp;the&nbsp;advocate&nbsp;records
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                036&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;decision,&nbsp;only&nbsp;that&nbsp;it&nbsp;has&nbsp;the&nbsp;opportunity&nbsp;to&nbsp;do&nbsp;so.&nbsp;Return&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                037&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value.&quot;)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                038&nbsp;&nbsp;&nbsp;&nbsp;(id&nbsp;[self]&nbsp;&quot;Return&nbsp;a&nbsp;value&nbsp;which&nbsp;uniquely&nbsp;identifies&nbsp;this&nbsp;agent.&quot;)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                039&nbsp;&nbsp;&nbsp;&nbsp;(decide&nbsp;[self&nbsp;proposition&nbsp;argument]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                040&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Return&nbsp;`true`,&nbsp;`false`&nbsp;or&nbsp;`nil`&nbsp;as&nbsp;the&nbsp;value&nbsp;of&nbsp;this&nbsp;`proposition`,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                041&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;given&nbsp;this&nbsp;`argument`.&nbsp;The&nbsp;value&nbsp;of&nbsp;`proposition`&nbsp;should&nbsp;be&nbsp;a
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                042&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proposition&nbsp;as&nbsp;defined&nbsp;by&nbsp;`wildwood.schema&#x2F;proposition?`;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                043&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;value&nbsp;of&nbsp;`argument`&nbsp;should&nbsp;satisfy&nbsp;`wildwood.schema&#x2F;argument?`.&quot;)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                044&nbsp;&nbsp;&nbsp;&nbsp;(move&nbsp;[self&nbsp;proposition&nbsp;argument]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                045&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Return&nbsp;a&nbsp;new&nbsp;argument&nbsp;structure&nbsp;representing&nbsp;the&nbsp;result&nbsp;of&nbsp;applying&nbsp;my
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                046&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`decide`&nbsp;method&nbsp;to&nbsp;this&nbsp;`proposition`&nbsp;and&nbsp;`argument`,&nbsp;specifying&nbsp;in
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                047&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;some&nbsp;way&nbsp;not&nbsp;yet&nbsp;determined&nbsp;what&nbsp;sort&nbsp;of&nbsp;move&nbsp;I&nbsp;have&nbsp;made.&quot;))
+                </span><br/>
+ </body>
+</html>

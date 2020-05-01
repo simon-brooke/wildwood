@@ -1,0 +1,395 @@
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../coverage.css"/>  <title> wildwood/schema.clj </title>
+ </head>
+ <body>
+<span class="covered" title="1 out of 1 forms covered">
+                001&nbsp;&nbsp;(ns&nbsp;wildwood.schema
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                002&nbsp;&nbsp;&nbsp;&nbsp;&quot;The&nbsp;knowledge&nbsp;representation.&nbsp;This&nbsp;probably&nbsp;ends&nbsp;up&nbsp;looking&nbsp;a&nbsp;bit&nbsp;like&nbsp;a
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                003&nbsp;&nbsp;&nbsp;&nbsp;Toulmin&nbsp;schema,&nbsp;where&nbsp;claims&nbsp;are&nbsp;represented&nbsp;as&nbsp;propositions.&nbsp;There&nbsp;also
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                004&nbsp;&nbsp;&nbsp;&nbsp;need&nbsp;to&nbsp;be&nbsp;rules&nbsp;or&nbsp;predicates,&nbsp;things&nbsp;which&nbsp;can&nbsp;test&nbsp;whether&nbsp;a&nbsp;given
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                005&nbsp;&nbsp;&nbsp;&nbsp;proposition&nbsp;has&nbsp;a&nbsp;given&nbsp;value.&nbsp;There&nbsp;may&nbsp;be&nbsp;other&nbsp;stuff&nbsp;in&nbsp;here.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                006&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                007&nbsp;&nbsp;&nbsp;&nbsp;Internal&nbsp;representation&nbsp;of&nbsp;most&nbsp;of&nbsp;this&nbsp;will&nbsp;be&nbsp;as&nbsp;Clojure&nbsp;maps.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                008&nbsp;&nbsp;&nbsp;&nbsp;)
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                009&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                010&nbsp;&nbsp;(def&nbsp;required-keys
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                011&nbsp;&nbsp;&nbsp;&nbsp;&quot;Every&nbsp;proposition&nbsp;is&nbsp;expected&nbsp;to&nbsp;have&nbsp;values&nbsp;for&nbsp;these&nbsp;keys.&quot;
+                </span><br/>
+<span class="covered" title="4 out of 4 forms covered">
+                012&nbsp;&nbsp;&nbsp;&nbsp;#{:verb&nbsp;:subject&nbsp;:object})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                013&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                014&nbsp;&nbsp;(def&nbsp;consensual-keys
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                015&nbsp;&nbsp;&nbsp;&nbsp;&quot;Every&nbsp;proposition&nbsp;which&nbsp;has&nbsp;these&nbsp;keys,&nbsp;in&nbsp;a&nbsp;given&nbsp;decision&nbsp;process,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                016&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;semantics&nbsp;and&nbsp;types&nbsp;for&nbsp;their&nbsp;values.&nbsp;The&nbsp;exact
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                017&nbsp;&nbsp;&nbsp;&nbsp;representations&nbsp;used&nbsp;for&nbsp;the&nbsp;values&nbsp;of&nbsp;these&nbsp;keys&nbsp;does&nbsp;not
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                018&nbsp;&nbsp;&nbsp;&nbsp;matter,&nbsp;it&nbsp;is&nbsp;consensual&nbsp;between&nbsp;all&nbsp;participating&nbsp;advocates&nbsp;in&nbsp;a
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                019&nbsp;&nbsp;&nbsp;&nbsp;decision&nbsp;process.&quot;
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                020&nbsp;&nbsp;&nbsp;&nbsp;#{:time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;a&nbsp;representation&nbsp;of&nbsp;time&nbsp;-&nbsp;which&nbsp;should&nbsp;have&nbsp;a&nbsp;canonical&nbsp;ordering;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                021&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:location&nbsp;&nbsp;&nbsp;;;&nbsp;a&nbsp;representation&nbsp;of&nbsp;place&nbsp;-&nbsp;which&nbsp;may&nbsp;have&nbsp;concepts&nbsp;of&nbsp;proximity;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:truth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;if&nbsp;present&nbsp;and&nbsp;value&nbsp;`false`,&nbsp;negates&nbsp;the&nbsp;proposition;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                023&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;an&nbsp;argument&nbsp;structure...!
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                024&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                025&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                026&nbsp;&nbsp;(def&nbsp;argument-keys
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                027&nbsp;&nbsp;&nbsp;&nbsp;&quot;Every&nbsp;argument&nbsp;is&nbsp;a&nbsp;proposition,&nbsp;which&nbsp;additionally&nbsp;has&nbsp;these&nbsp;keys.&quot;
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                028&nbsp;&nbsp;&nbsp;&nbsp;#{:confidence&nbsp;;;&nbsp;how&nbsp;sure&nbsp;am&nbsp;I?&nbsp;A&nbsp;value,&nbsp;perhaps,&nbsp;in&nbsp;the&nbsp;range&nbsp;-1&nbsp;to&nbsp;1,&nbsp;although&nbsp;conventionally&nbsp;if&nbsp;less&nbsp;than&nbsp;1&nbsp;we&nbsp;probably&nbsp;set&nbsp;the&nbsp;`:truth`&nbsp;value&nbsp;to&nbsp;false;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                029&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:authority&nbsp;&nbsp;;;&nbsp;id&nbsp;of&nbsp;agent&nbsp;from&nbsp;whom,&nbsp;or&nbsp;rule&nbsp;from&nbsp;which,&nbsp;I&nbsp;know&nbsp;this.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                030&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                031&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                032&nbsp;&nbsp;(def&nbsp;preserved-keys
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                033&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keys&nbsp;whose&nbsp;values&nbsp;should&nbsp;not&nbsp;be&nbsp;minimised&nbsp;during&nbsp;proposition&nbsp;minimisation&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                034&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;TODO:&nbsp;actually,&nbsp;this&nbsp;may&nbsp;end&nbsp;up&nbsp;being&nbsp;just&nbsp;:data
+                </span><br/>
+<span class="covered" title="6 out of 6 forms covered">
+                035&nbsp;&nbsp;&nbsp;&nbsp;(set&nbsp;(cons&nbsp;:data&nbsp;argument-keys)))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                036&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                037&nbsp;&nbsp;(defn&nbsp;proposition?
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                038&nbsp;&nbsp;&nbsp;&nbsp;&quot;True&nbsp;if&nbsp;`o`&nbsp;qualifies&nbsp;as&nbsp;a&nbsp;proposition.&nbsp;A&nbsp;proposition&nbsp;is&nbsp;probably&nbsp;a&nbsp;map
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                039&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;some&nbsp;privileged&nbsp;keys,&nbsp;and&nbsp;may&nbsp;look&nbsp;something&nbsp;like&nbsp;a&nbsp;minimised
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                040&nbsp;&nbsp;&nbsp;&nbsp;`the-great-game.gossip.news-items`&nbsp;item.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                041&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                042&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;`minimised`&nbsp;is&nbsp;passed&nbsp;and&nbsp;is&nbsp;`true`,&nbsp;then&nbsp;the&nbsp;proposition&nbsp;must
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                043&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;minimised&nbsp;-&nbsp;that&nbsp;is&nbsp;to&nbsp;say,&nbsp;the&nbsp;values&nbsp;of&nbsp;keys&nbsp;in&nbsp;a&nbsp;proposition&nbsp;map&nbsp;may
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                044&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;themselves&nbsp;be&nbsp;keys.&nbsp;Where&nbsp;the&nbsp;value&nbsp;of&nbsp;a&nbsp;key&nbsp;represents&nbsp;an&nbsp;object&nbsp;in&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                045&nbsp;&nbsp;&nbsp;&nbsp;world,&nbsp;that&nbsp;value&nbsp;must&nbsp;be&nbsp;simply&nbsp;the&nbsp;`id`&nbsp;of&nbsp;the&nbsp;object,&nbsp;not&nbsp;a&nbsp;richer
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                046&nbsp;&nbsp;&nbsp;&nbsp;representation.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                047&nbsp;&nbsp;&nbsp;&nbsp;([o]
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                048&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(and
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                049&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map?&nbsp;o)
+                </span><br/>
+<span class="covered" title="6 out of 6 forms covered">
+                050&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(every?&nbsp;#(o&nbsp;%)&nbsp;required-keys)))
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                051&nbsp;&nbsp;&nbsp;&nbsp;([o&nbsp;minimised]
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                052&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(and
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                053&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(proposition?&nbsp;o))
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                054&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(not
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                055&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(when
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                056&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(true?&nbsp;minimised)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                057&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;not&nbsp;good&nbsp;enough.&nbsp;An&nbsp;argument&nbsp;is&nbsp;a&nbsp;proposition&nbsp;even&nbsp;if&nbsp;its&nbsp;argument-keys
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                058&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;are&nbsp;not&nbsp;minimised&nbsp;(indeed,&nbsp;they&nbsp;should&nbsp;not&nbsp;be).&nbsp;TODO:&nbsp;fix.
+                </span><br/>
+<span class="covered" title="6 out of 6 forms covered">
+                059&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(some&nbsp;map?&nbsp;(vals&nbsp;o))))))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                060&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                061&nbsp;&nbsp;(defn&nbsp;truth
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                062&nbsp;&nbsp;&nbsp;&nbsp;&quot;If&nbsp;`p`&nbsp;is&nbsp;a&nbsp;proposition,&nbsp;return&nbsp;whether&nbsp;the&nbsp;value&nbsp;asserted&nbsp;by&nbsp;that
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                063&nbsp;&nbsp;&nbsp;&nbsp;proposition&nbsp;is&nbsp;`true`.&nbsp;If&nbsp;the&nbsp;`:truth`&nbsp;key&nbsp;is&nbsp;missing,&nbsp;`true`&nbsp;is
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                064&nbsp;&nbsp;&nbsp;&nbsp;assumed.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                065&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;TODO:&nbsp;for&nbsp;orthogonality,&nbsp;this&nbsp;might&nbsp;be&nbsp;renamed&nbsp;`decide`.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                066&nbsp;&nbsp;&nbsp;&nbsp;[p]
+                </span><br/>
+<span class="partial" title="1 out of 2 forms covered">
+                067&nbsp;&nbsp;&nbsp;&nbsp;(if
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                068&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(proposition?&nbsp;p)
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                069&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                070&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(false?&nbsp;(:truth&nbsp;p))
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                071&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                072&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                073&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nil))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                074&nbsp;&nbsp;
+                </span><br/>
+<span class="partial" title="1 out of 2 forms covered">
+                075&nbsp;&nbsp;(defn&nbsp;rule?
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                076&nbsp;&nbsp;&nbsp;&nbsp;&quot;True&nbsp;if&nbsp;`o`&nbsp;qualifies&nbsp;as&nbsp;a&nbsp;rule.&nbsp;A&nbsp;rule&nbsp;is&nbsp;a&nbsp;structure&nbsp;which&nbsp;comprises
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                077&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;an&nbsp;id&nbsp;and
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                078&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments,&nbsp;a&nbsp;proposition&nbsp;and&nbsp;a&nbsp;knowledge&nbsp;accessor,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                079&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;which&nbsp;should&nbsp;(if&nbsp;this&nbsp;can&nbsp;simply&nbsp;be&nbsp;checked)&nbsp;return&nbsp;an&nbsp;argument
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                080&nbsp;&nbsp;&nbsp;&nbsp;structure.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                081&nbsp;&nbsp;&nbsp;&nbsp;[o]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                082&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;TODO:&nbsp;write&nbsp;this.&nbsp;In&nbsp;practice&nbsp;it&nbsp;may&nbsp;be&nbsp;simpler&nbsp;if&nbsp;we&nbsp;defprotocol&nbsp;or
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                083&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;defrecord&nbsp;a&nbsp;rule&nbsp;structure.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                084&nbsp;&nbsp;&nbsp;&nbsp;false)
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                085&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                086&nbsp;&nbsp;(defn&nbsp;argument?
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                087&nbsp;&nbsp;&nbsp;&nbsp;&quot;True&nbsp;if&nbsp;`o`&nbsp;qualifies&nbsp;as&nbsp;an&nbsp;argument&nbsp;structure.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                088&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                089&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;argument&nbsp;structure&nbsp;is&nbsp;a&nbsp;(potentially&nbsp;rich)&nbsp;proposition&nbsp;which,&nbsp;in&nbsp;addition,&nbsp;should&nbsp;have&nbsp;values
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                090&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;`:confidence`&nbsp;and&nbsp;`:authority`.&nbsp;A&nbsp;value&nbsp;for&nbsp;`:data`&nbsp;may,&nbsp;and&nbsp;probably&nbsp;will,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                091&nbsp;&nbsp;&nbsp;&nbsp;also&nbsp;be&nbsp;present&nbsp;but&nbsp;is&nbsp;not&nbsp;required.&nbsp;The&nbsp;value&nbsp;of&nbsp;`:confidence`&nbsp;must&nbsp;be&nbsp;a&nbsp;number
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                092&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;range&nbsp;-1&nbsp;to&nbsp;1.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                093&nbsp;&nbsp;&nbsp;&nbsp;[o]
+                </span><br/>
+<span class="partial" title="14 out of 15 forms covered">
+                094&nbsp;&nbsp;&nbsp;&nbsp;(and
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                095&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(proposition?&nbsp;o)
+                </span><br/>
+<span class="covered" title="7 out of 7 forms covered">
+                096&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(every?&nbsp;#(o&nbsp;%)&nbsp;argument-keys)
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                097&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(number?&nbsp;(:confidence&nbsp;o))
+                </span><br/>
+<span class="covered" title="4 out of 4 forms covered">
+                098&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;=&nbsp;-1&nbsp;(:confidence&nbsp;o)&nbsp;1)))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                099&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="6 out of 6 forms covered">
+                100&nbsp;&nbsp;(set&nbsp;(cons&nbsp;:data&nbsp;argument-keys))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                101&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                102&nbsp;&nbsp;(defn&nbsp;minimise
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                103&nbsp;&nbsp;&nbsp;&nbsp;&quot;Expecting&nbsp;that&nbsp;`o`&nbsp;is&nbsp;a&nbsp;(potentially&nbsp;rich)&nbsp;proposition,&nbsp;return&nbsp;a&nbsp;map&nbsp;identical
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                104&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;`o`&nbsp;save&nbsp;that&nbsp;for&nbsp;each&nbsp;value&nbsp;`v`&nbsp;of&nbsp;key&nbsp;`k`&nbsp;in&nbsp;`o`,&nbsp;if&nbsp;`v`&nbsp;is&nbsp;a&nbsp;map&nbsp;and&nbsp;`k`
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                105&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;a&nbsp;member&nbsp;of&nbsp;`argument-keys`,&nbsp;then&nbsp;the&nbsp;returned&nbsp;map&nbsp;shall&nbsp;substitute&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                106&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;of&nbsp;`(:id&nbsp;v)`.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                107&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                108&nbsp;&nbsp;&nbsp;&nbsp;see&nbsp;also&nbsp;`wildwood.knowledge-access&#x2F;maximise`.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                109&nbsp;&nbsp;&nbsp;&nbsp;[o]
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                110&nbsp;&nbsp;&nbsp;&nbsp;(if
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                111&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map?&nbsp;o)
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                112&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reduce
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                113&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;merge
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                114&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{}
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                115&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                116&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fn&nbsp;[k]
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                117&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{k
+                </span><br/>
+<span class="covered" title="4 out of 4 forms covered">
+                118&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(let&nbsp;[v&nbsp;(k&nbsp;o)]
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                119&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(if
+                </span><br/>
+<span class="covered" title="12 out of 12 forms covered">
+                120&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(and&nbsp;(not&nbsp;(preserved-keys&nbsp;k))&nbsp;(map?&nbsp;v))
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                121&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(:id&nbsp;v)
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                122&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v))})
+                </span><br/>
+<span class="covered" title="3 out of 3 forms covered">
+                123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(keys&nbsp;o)))
+                </span><br/>
+<span class="not-covered" title="0 out of 1 forms covered">
+                124&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                125&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="2 out of 2 forms covered">
+                126&nbsp;&nbsp;(proposition?
+                </span><br/>
+<span class="covered" title="7 out of 7 forms covered">
+                127&nbsp;&nbsp;&nbsp;&nbsp;(minimise&nbsp;{:verb&nbsp;:kill
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                128&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:subject&nbsp;{:id&nbsp;:brutus&nbsp;:name&nbsp;&quot;Marcus&nbsp;Brutus&quot;}
+                </span><br/>
+<span class="covered" title="7 out of 7 forms covered">
+                129&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:object&nbsp;{:id&nbsp;:caesar&nbsp;:name&nbsp;&quot;Gaius&nbsp;Julius&nbsp;Caesar&quot;&nbsp;:wife&nbsp;:drusila}}))
+                </span><br/>
+ </body>
+</html>

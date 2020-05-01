@@ -1,0 +1,440 @@
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../coverage.css"/>  <title> wildwood/caesar.clj </title>
+ </head>
+ <body>
+<span class="covered" title="1 out of 1 forms covered">
+                001&nbsp;&nbsp;(ns&nbsp;wildwood.caesar
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                002&nbsp;&nbsp;&nbsp;&nbsp;&quot;A&nbsp;dummy&nbsp;set&nbsp;of&nbsp;advocates&nbsp;and&nbsp;knowledge&nbsp;accessors&nbsp;with&nbsp;knowledge&nbsp;about&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                003&nbsp;&nbsp;&nbsp;&nbsp;death&nbsp;of&nbsp;Julius&nbsp;Caesar.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                004&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                005&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;Case&nbsp;Against&nbsp;Marcus&nbsp;Brutus
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                006&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                007&nbsp;&nbsp;&nbsp;&nbsp;Did&nbsp;Brutus&nbsp;conspire&nbsp;to&nbsp;kill&nbsp;Caesar&nbsp;in&nbsp;the&nbsp;forum&nbsp;in&nbsp;the&nbsp;Ides&nbsp;of&nbsp;March?
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                008&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                009&nbsp;&nbsp;&nbsp;&nbsp;Falco,&nbsp;the&nbsp;detective,&nbsp;must&nbsp;find&nbsp;out.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                010&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                011&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;The&nbsp;witnesses
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                012&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                013&nbsp;&nbsp;&nbsp;&nbsp;Anthony&nbsp;knows&nbsp;that&nbsp;Brutus&nbsp;is&nbsp;honourable,&nbsp;and&nbsp;that&nbsp;Caesar&nbsp;is&nbsp;buried.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                014&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                015&nbsp;&nbsp;&nbsp;&nbsp;Brutus&nbsp;will&nbsp;admit&nbsp;he&nbsp;was&nbsp;in&nbsp;the&nbsp;forum&nbsp;on&nbsp;the&nbsp;ides&nbsp;of&nbsp;March&nbsp;and&nbsp;is&nbsp;a&nbsp;witness
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                016&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;Cassius&nbsp;was&nbsp;also&nbsp;present.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                017&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                018&nbsp;&nbsp;&nbsp;&nbsp;Cassius&nbsp;and&nbsp;Longus&nbsp;each&nbsp;bear&nbsp;witness&nbsp;that&nbsp;the&nbsp;other&nbsp;killed&nbsp;Caesar&nbsp;in&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                019&nbsp;&nbsp;&nbsp;&nbsp;Forum&nbsp;on&nbsp;the&nbsp;Ides&nbsp;of&nbsp;March.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                020&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                021&nbsp;&nbsp;&nbsp;&nbsp;Drusilla&nbsp;believes&nbsp;that&nbsp;Brutus&nbsp;killed&nbsp;Caesar&nbsp;in&nbsp;the&nbsp;Forum&nbsp;on&nbsp;the&nbsp;Ides&nbsp;of
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                022&nbsp;&nbsp;&nbsp;&nbsp;March,&nbsp;but&nbsp;was&nbsp;not&nbsp;a&nbsp;witness.&nbsp;She&nbsp;also&nbsp;bears&nbsp;witness&nbsp;that&nbsp;Caesar&nbsp;was&nbsp;buried
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                023&nbsp;&nbsp;&nbsp;&nbsp;on&nbsp;the&nbsp;18th&nbsp;March.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                024&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                025&nbsp;&nbsp;&nbsp;&nbsp;Gaius&nbsp;believes&nbsp;that&nbsp;Brutus&nbsp;killed&nbsp;Caesar&nbsp;in&nbsp;the&nbsp;Forum&nbsp;in&nbsp;April,&nbsp;but&nbsp;was&nbsp;not
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                026&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;witness.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                027&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                028&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;The&nbsp;rules
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                029&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                030&nbsp;&nbsp;&nbsp;&nbsp;There&nbsp;is&nbsp;a&nbsp;rule&nbsp;which&nbsp;says&nbsp;that&nbsp;if&nbsp;you&nbsp;kill&nbsp;someone&nbsp;and&nbsp;you&nbsp;have&nbsp;accomplices
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                031&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;you&#x27;re&nbsp;not&nbsp;honourable,&nbsp;and&nbsp;a&nbsp;default&nbsp;that&nbsp;has-accomplices&nbsp;is&nbsp;false.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                032&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                033&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;has-accomplices&nbsp;boils&nbsp;down&nbsp;to
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                034&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;For&nbsp;a&nbsp;given&nbsp;verb,&nbsp;object,&nbsp;location&nbsp;and&nbsp;time,&nbsp;there&nbsp;is&nbsp;more&nbsp;than&nbsp;one&nbsp;subject.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                035&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                036&nbsp;&nbsp;&nbsp;&nbsp;That&#x27;s&nbsp;quite&nbsp;sophisticated&nbsp;to&nbsp;represent.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                037&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                038&nbsp;&nbsp;&nbsp;&nbsp;There&nbsp;is&nbsp;a&nbsp;rule&nbsp;which&nbsp;says&nbsp;you&nbsp;can&#x27;t&nbsp;be&nbsp;killed&nbsp;after&nbsp;you&#x27;re&nbsp;dead&nbsp;(temporal
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                039&nbsp;&nbsp;&nbsp;&nbsp;reasoning).
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                040&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                041&nbsp;&nbsp;&nbsp;&nbsp;There&nbsp;is&nbsp;a&nbsp;rule&nbsp;which&nbsp;says&nbsp;if&nbsp;you&#x27;ve&nbsp;been&nbsp;killed&nbsp;or&nbsp;been&nbsp;buried&nbsp;then&nbsp;you&#x27;re
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                042&nbsp;&nbsp;&nbsp;&nbsp;dead.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                043&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                044&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;case&nbsp;against&nbsp;Brutus&nbsp;is&nbsp;based&nbsp;on&nbsp;Drusilla&#x27;s&nbsp;claim&nbsp;and&nbsp;on&nbsp;Gaius&#x27;s.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                045&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                046&nbsp;&nbsp;&nbsp;&nbsp;Drusilla&#x27;s&nbsp;can&nbsp;be&nbsp;doubted&nbsp;because
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                047&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;She&nbsp;wasn&#x27;t&nbsp;a&nbsp;witness&nbsp;and
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                048&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;Is&nbsp;a&nbsp;woman.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                049&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                050&nbsp;&nbsp;&nbsp;&nbsp;Gaius&#x27;s&nbsp;can&nbsp;be&nbsp;doubted&nbsp;because
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                051&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;he&nbsp;wasn&#x27;t&nbsp;a&nbsp;witness,&nbsp;and&nbsp;because
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                052&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;it&#x27;s&nbsp;inconsistent&nbsp;with&nbsp;the&nbsp;evidence&nbsp;that&nbsp;Caesar&nbsp;was&nbsp;buried&nbsp;on&nbsp;the&nbsp;18th.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                053&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                054&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;The&nbsp;conclusion
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                055&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                056&nbsp;&nbsp;&nbsp;&nbsp;Thus,&nbsp;I&nbsp;think,&nbsp;Falco&nbsp;must&nbsp;conclude&nbsp;that&nbsp;Brutus&nbsp;didn&#x27;t&nbsp;kill&nbsp;Caesar,&nbsp;because&nbsp;if
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                057&nbsp;&nbsp;&nbsp;&nbsp;he&nbsp;had&nbsp;he&nbsp;must&nbsp;have&nbsp;had&nbsp;accomplices&nbsp;(Cassius&nbsp;and&nbsp;Longus,&nbsp;who&nbsp;clearly&nbsp;were
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                058&nbsp;&nbsp;&nbsp;&nbsp;accomplices&nbsp;and&nbsp;implicate&nbsp;one&nbsp;another),&nbsp;but&nbsp;honourable&nbsp;men&nbsp;don&#x27;t&nbsp;kill&nbsp;with
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                059&nbsp;&nbsp;&nbsp;&nbsp;accomplices&nbsp;and&nbsp;Brutus&nbsp;is&nbsp;an&nbsp;honourable&nbsp;man.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                060&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                061&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;Features
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                062&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                063&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;`features`&nbsp;in&nbsp;DTree&nbsp;terms&nbsp;we&#x27;re&nbsp;interested&nbsp;in&nbsp;to&nbsp;make&nbsp;these&nbsp;inferences&nbsp;are
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                064&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                065&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`did-kill`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;which&nbsp;is&nbsp;in&nbsp;the&nbsp;subject&nbsp;position&nbsp;of&nbsp;a&nbsp;`kill`&nbsp;proposition;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                066&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`was-killed`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;which&nbsp;is&nbsp;in&nbsp;the&nbsp;object&nbsp;position&nbsp;of&nbsp;a&nbsp;`kill`&nbsp;proposition;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                067&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`buried`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;which&nbsp;is&nbsp;in&nbsp;the&nbsp;object&nbsp;position&nbsp;of&nbsp;a&nbsp;`bury`&nbsp;proposition;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                068&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`dead`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;of&nbsp;which&nbsp;either&nbsp;`was-killed`&nbsp;or&nbsp;`buried`&nbsp;is&nbsp;true;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                069&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`honourable`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity,&nbsp;provided&nbsp;that&nbsp;`did-lie`&nbsp;and&nbsp;`did-murder`&nbsp;are&nbsp;false;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                070&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`did-murder`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;x&nbsp;that&nbsp;`did-kill[x,y]`&nbsp;for&nbsp;some&nbsp;object&nbsp;y&nbsp;is&nbsp;true&nbsp;of,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                071&nbsp;&nbsp;&nbsp;&nbsp;provided&nbsp;that&nbsp;there&nbsp;exists&nbsp;some&nbsp;other&nbsp;entity&nbsp;p&nbsp;of&nbsp;whom&nbsp;`did-kill[p,x]`&nbsp;is&nbsp;also&nbsp;true,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                072&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;that&nbsp;`was-unarmed[y]`&nbsp;is&nbsp;true;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                073&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`did-lie`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;which&nbsp;has&nbsp;offered&nbsp;a&nbsp;proposition&nbsp;which&nbsp;for&nbsp;other&nbsp;reasons&nbsp;we&nbsp;do&nbsp;not&nbsp;believe.&nbsp;Tricky.&nbsp;False&nbsp;by&nbsp;default&nbsp;and&nbsp;I&nbsp;think&nbsp;we&nbsp;probably&nbsp;leave&nbsp;it&nbsp;at&nbsp;that&nbsp;for&nbsp;now.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                074&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;`was-unarmed`&nbsp;-&nbsp;true&nbsp;of&nbsp;an&nbsp;entity&nbsp;at&nbsp;a&nbsp;time&nbsp;`t`&nbsp;if&nbsp;they&nbsp;were&nbsp;unarmed&nbsp;at&nbsp;the&nbsp;time.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                075&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                076&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;ALL&nbsp;of&nbsp;this&nbsp;is&nbsp;too&nbsp;complex&nbsp;for&nbsp;the&nbsp;simple&nbsp;DTree&nbsp;logic&nbsp;of&nbsp;the&nbsp;Arboretum&nbsp;&#x2F;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                077&nbsp;&nbsp;&nbsp;&nbsp;KnacqTools&nbsp;generation.&nbsp;They&nbsp;could&nbsp;not&nbsp;unpack&nbsp;propositions&nbsp;as&nbsp;I&#x27;m&nbsp;proposing&nbsp;here.
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                078&nbsp;&nbsp;&nbsp;&nbsp;&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                079&nbsp;&nbsp;&nbsp;&nbsp;(:require&nbsp;[wildwood.knowledge-accessor&nbsp;:refer&nbsp;[Accessor]]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                080&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[wildwood.advocate&nbsp;:refer&nbsp;[Advocate]]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                081&nbsp;&nbsp;
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                082&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                083&nbsp;&nbsp;(def&nbsp;ides-of-march
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                084&nbsp;&nbsp;&nbsp;&nbsp;&quot;16th&nbsp;March,&nbsp;44BC&quot;
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                085&nbsp;&nbsp;&nbsp;&nbsp;(+&nbsp;-440000&nbsp;300&nbsp;16))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                086&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                087&nbsp;&nbsp;(def&nbsp;eighteenth-march
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                088&nbsp;&nbsp;&nbsp;&nbsp;&quot;18th&nbsp;March,&nbsp;44BC&quot;
+                </span><br/>
+<span class="covered" title="5 out of 5 forms covered">
+                089&nbsp;&nbsp;&nbsp;&nbsp;(+&nbsp;-440000&nbsp;300&nbsp;18))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                090&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                091&nbsp;&nbsp;(def&nbsp;march
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                092&nbsp;&nbsp;&nbsp;&nbsp;&quot;The&nbsp;month&nbsp;of&nbsp;March,&nbsp;44BC,&nbsp;as&nbsp;a&nbsp;range.&quot;
+                </span><br/>
+<span class="covered" title="13 out of 13 forms covered">
+                093&nbsp;&nbsp;&nbsp;&nbsp;(sort&nbsp;[(+&nbsp;-440000&nbsp;300&nbsp;1)&nbsp;(+&nbsp;-440000&nbsp;300&nbsp;30)]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                094&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                095&nbsp;&nbsp;(def&nbsp;april
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                096&nbsp;&nbsp;&nbsp;&nbsp;&quot;The&nbsp;month&nbsp;of&nbsp;April,&nbsp;44BC,&nbsp;as&nbsp;a&nbsp;range.&quot;
+                </span><br/>
+<span class="covered" title="13 out of 13 forms covered">
+                097&nbsp;&nbsp;&nbsp;&nbsp;(sort&nbsp;[(+&nbsp;-440000&nbsp;400&nbsp;1)&nbsp;(+&nbsp;-440000&nbsp;400&nbsp;30)]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                098&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                099&nbsp;&nbsp;(def&nbsp;anthony-kb
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                100&nbsp;&nbsp;&nbsp;&nbsp;&quot;Mark&nbsp;Antony&nbsp;knows&nbsp;that&nbsp;Brutus&nbsp;is&nbsp;honourable,&nbsp;and&nbsp;that&nbsp;Caesar&nbsp;is&nbsp;buried.&quot;
+                </span><br/>
+<span class="covered" title="11 out of 11 forms covered">
+                101&nbsp;&nbsp;&nbsp;&nbsp;{:brutus&nbsp;[{:verb&nbsp;:is&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:honourable}]
+                </span><br/>
+<span class="covered" title="12 out of 12 forms covered">
+                102&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:caesar&nbsp;[{:verb&nbsp;:bury&nbsp;:subject&nbsp;:calpurnia&nbsp;:object&nbsp;:caesar&nbsp;:date&nbsp;eighteenth-march&nbsp;:nth-hand&nbsp;1}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                103&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                104&nbsp;&nbsp;(def&nbsp;brutus-kb
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                105&nbsp;&nbsp;&nbsp;&nbsp;&quot;Brutus&nbsp;will&nbsp;admit&nbsp;that&nbsp;he&nbsp;and&nbsp;Cassius&nbsp;were&nbsp;in&nbsp;the&nbsp;forum&nbsp;in&nbsp;the&nbsp;Ides&nbsp;of&nbsp;March&quot;
+                </span><br/>
+<span class="covered" title="18 out of 18 forms covered">
+                106&nbsp;&nbsp;&nbsp;&nbsp;{:brutus&nbsp;[{:verb&nbsp;:present&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:forum&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                107&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:cassius&nbsp;[{:verb&nbsp;:present&nbsp;:subject&nbsp;:cassius&nbsp;:object&nbsp;:forum&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                108&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:forum&nbsp;[{:verb&nbsp;:present&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:forum&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}
+                </span><br/>
+<span class="covered" title="13 out of 13 forms covered">
+                109&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:verb&nbsp;:present&nbsp;:subject&nbsp;:cassius&nbsp;:object&nbsp;:forum&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                110&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                111&nbsp;&nbsp;(def&nbsp;cassius-kb
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                112&nbsp;&nbsp;&nbsp;&nbsp;&quot;Cassius&nbsp;and&nbsp;Longus&nbsp;each&nbsp;bear&nbsp;witness&nbsp;that&nbsp;the&nbsp;other&nbsp;killed&nbsp;Caesar&nbsp;in&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                113&nbsp;&nbsp;&nbsp;&nbsp;Forum&nbsp;on&nbsp;the&nbsp;Ides&nbsp;of&nbsp;March.&quot;
+                </span><br/>
+<span class="covered" title="18 out of 18 forms covered">
+                114&nbsp;&nbsp;&nbsp;&nbsp;{:caesar&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:longus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                115&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:longus&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:longus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                116&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:forum&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:longus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                117&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                118&nbsp;&nbsp;(def&nbsp;drusila-kb
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                119&nbsp;&nbsp;&nbsp;&nbsp;&quot;Drusila&nbsp;has&nbsp;heard&nbsp;that&nbsp;Brutus&nbsp;killed&nbsp;Caesar&nbsp;in&nbsp;the&nbsp;forum.&nbsp;She&nbsp;keys&nbsp;it&nbsp;on&nbsp;all&nbsp;three,&nbsp;for&nbsp;efficiency
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                120&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;retrieval.&quot;
+                </span><br/>
+<span class="covered" title="18 out of 18 forms covered">
+                121&nbsp;&nbsp;&nbsp;&nbsp;{:caesar&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;2}
+                </span><br/>
+<span class="covered" title="11 out of 11 forms covered">
+                122&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:verb&nbsp;:bury&nbsp;:subject&nbsp;:calpurnia&nbsp;:object&nbsp;:caesar&nbsp;:date&nbsp;eighteenth-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:brutus&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;2}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                124&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:forum&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;2}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                125&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                126&nbsp;&nbsp;(def&nbsp;faldo-db
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                127&nbsp;&nbsp;&nbsp;&nbsp;&quot;Falco&nbsp;believes&nbsp;that&nbsp;Caesar&nbsp;has&nbsp;been&nbsp;killed,&nbsp;but&nbsp;doesn&#x27;t&nbsp;know&nbsp;by&nbsp;whom&nbsp;or&nbsp;when.&quot;
+                </span><br/>
+<span class="covered" title="12 out of 12 forms covered">
+                128&nbsp;&nbsp;&nbsp;&nbsp;{:caesar&nbsp;[{:verb&nbsp;:kill&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum}]
+                </span><br/>
+<span class="covered" title="8 out of 8 forms covered">
+                129&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:brutus&nbsp;[{:verb&nbsp;:kill&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum}]
+                </span><br/>
+<span class="covered" title="8 out of 8 forms covered">
+                130&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:forum&nbsp;[{:verb&nbsp;:kill&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                131&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                132&nbsp;&nbsp;(def&nbsp;gaius-db
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                133&nbsp;&nbsp;&nbsp;&nbsp;&quot;Gaius&nbsp;has&nbsp;heard&nbsp;that&nbsp;Brutus&nbsp;killed&nbsp;Caesar,&nbsp;but&nbsp;believes&nbsp;it&nbsp;happened&nbsp;in&nbsp;April.&quot;
+                </span><br/>
+<span class="covered" title="18 out of 18 forms covered">
+                134&nbsp;&nbsp;&nbsp;&nbsp;{:caesar&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;april&nbsp;:nth-hand&nbsp;2}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                135&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:brutus&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;april&nbsp;:nth-hand&nbsp;2}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                136&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:forum&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;april&nbsp;:nth-hand&nbsp;2}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                137&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                138&nbsp;&nbsp;(def&nbsp;longus-kb
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                139&nbsp;&nbsp;&nbsp;&nbsp;&quot;Cassius&nbsp;and&nbsp;Longus&nbsp;each&nbsp;bear&nbsp;witness&nbsp;that&nbsp;the&nbsp;other&nbsp;killed&nbsp;Caesar&nbsp;in&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                140&nbsp;&nbsp;&nbsp;&nbsp;Forum&nbsp;on&nbsp;the&nbsp;Ides&nbsp;of&nbsp;March.&quot;
+                </span><br/>
+<span class="covered" title="18 out of 18 forms covered">
+                141&nbsp;&nbsp;&nbsp;&nbsp;{:caesar&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:cassius&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:cassius&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:cassius&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]
+                </span><br/>
+<span class="covered" title="14 out of 14 forms covered">
+                143&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:forum&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:cassius&nbsp;:object&nbsp;:caesar&nbsp;:location&nbsp;:forum&nbsp;:date&nbsp;ides-of-march&nbsp;:nth-hand&nbsp;1}]})
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                144&nbsp;&nbsp;
+                </span><br/>
+ </body>
+</html>

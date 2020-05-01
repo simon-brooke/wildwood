@@ -1,0 +1,98 @@
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../coverage.css"/>  <title> wildwood/bialowieza.clj </title>
+ </head>
+ <body>
+<span class="covered" title="1 out of 1 forms covered">
+                001&nbsp;&nbsp;(ns&nbsp;wildwood.bialowieza
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                002&nbsp;&nbsp;&nbsp;&nbsp;&quot;The&nbsp;second&nbsp;iteration&nbsp;of&nbsp;the&nbsp;core&nbsp;inference&nbsp;engine&nbsp;for&nbsp;Wildwood&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                003&nbsp;&nbsp;&nbsp;&nbsp;(:require&nbsp;[wildwood.advocate&nbsp;:refer&nbsp;[Advocate]]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                004&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[wildwood.schema&nbsp;:refer&nbsp;[proposition?]]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                005&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                006&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;to&nbsp;start&nbsp;a&nbsp;game&nbsp;we&nbsp;must&nbsp;have&nbsp;n&nbsp;advocates,&nbsp;where&nbsp;n&nbsp;&gt;&nbsp;1.&nbsp;Each&nbsp;must&nbsp;have
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                007&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;its&nbsp;own&nbsp;knowledge&nbsp;accessor,&nbsp;so&nbsp;at&nbsp;the&nbsp;level&nbsp;of&nbsp;the&nbsp;game&nbsp;engine&nbsp;we&nbsp;don&#x27;t
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                008&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;need&nbsp;to&nbsp;know&nbsp;how&nbsp;to&nbsp;access&nbsp;knowledge.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                009&nbsp;&nbsp;
+                </span><br/>
+<span class="partial" title="1 out of 2 forms covered">
+                010&nbsp;&nbsp;&nbsp;&nbsp;(defn&nbsp;decide
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                011&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Decide&nbsp;the&nbsp;truth&nbsp;value&nbsp;of&nbsp;this&nbsp;`proposition`&nbsp;by&nbsp;convening&nbsp;a&nbsp;game&nbsp;between
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;these&nbsp;advocate&nbsp;`agents`.&nbsp;Iterate&nbsp;the&nbsp;game&nbsp;until&nbsp;all&nbsp;agents&nbsp;PASS;&nbsp;then&nbsp;finally
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offer&nbsp;each&nbsp;agent&#x27;s&nbsp;`record`&nbsp;method&nbsp;the&nbsp;`proposition`&nbsp;together&nbsp;with&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                014&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decided&nbsp;truth&nbsp;value&nbsp;(`true`&nbsp;or&nbsp;`false`),&nbsp;before&nbsp;returning&nbsp;that&nbsp;value.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                015&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                016&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;`proposition`&nbsp;is&nbsp;a&nbsp;proposition&nbsp;as&nbsp;defined&nbsp;in&nbsp;the&nbsp;`wildwood.schema`;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;say,&nbsp;the&nbsp;predicate&nbsp;`wildwood.schema&#x2F;predicate?`&nbsp;returns&nbsp;true
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                018&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;it.&nbsp;If&nbsp;the&nbsp;proposition&nbsp;isn&#x27;t&nbsp;a&nbsp;predicate,&nbsp;throw&nbsp;an&nbsp;exception.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                019&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                020&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each&nbsp;of&nbsp;`agents`&nbsp;should&nbsp;be&nbsp;an&nbsp;object&nbsp;implementing&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                021&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`wildwood.advocate&#x2F;Advocate`&nbsp;protocol.&nbsp;If&nbsp;an&nbsp;agent&nbsp;isn&#x27;t&nbsp;an&nbsp;Advocate,
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;an&nbsp;exception.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                023&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                024&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do&nbsp;not&nbsp;throw&nbsp;an&nbsp;exception&nbsp;under&nbsp;any&nbsp;other&nbsp;circumstances.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                025&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                026&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;agent&nbsp;throws&nbsp;an&nbsp;exception,&nbsp;catch&nbsp;it&nbsp;and&nbsp;treat&nbsp;it&nbsp;as&nbsp;a&nbsp;PASS.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                027&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[proposition&nbsp;&amp;&nbsp;agents]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                028&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;;&nbsp;TODO:&nbsp;actually&nbsp;write&nbsp;it.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                029&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                030&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false)
+                </span><br/>
+ </body>
+</html>

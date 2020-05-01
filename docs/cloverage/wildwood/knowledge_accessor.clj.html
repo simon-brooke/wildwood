@@ -1,0 +1,110 @@
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../coverage.css"/>  <title> wildwood/knowledge_accessor.clj </title>
+ </head>
+ <body>
+<span class="covered" title="1 out of 1 forms covered">
+                001&nbsp;&nbsp;(ns&nbsp;wildwood.knowledge-accessor
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                002&nbsp;&nbsp;&nbsp;&nbsp;&quot;The&nbsp;key&nbsp;point&nbsp;of&nbsp;building&nbsp;Bialowieza&nbsp;as&nbsp;a&nbsp;library&nbsp;rather&nbsp;than&nbsp;a&nbsp;complete
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                003&nbsp;&nbsp;&nbsp;&nbsp;application&nbsp;is&nbsp;that&nbsp;it&nbsp;should&nbsp;be&nbsp;possible&nbsp;to&nbsp;hook&nbsp;it&nbsp;up&nbsp;to&nbsp;multiple&nbsp;sources
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                004&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;knowledge.&nbsp;Thus&nbsp;we&nbsp;must&nbsp;design&nbsp;a&nbsp;protocol&nbsp;through&nbsp;which&nbsp;knowledge&nbsp;can&nbsp;be
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                005&nbsp;&nbsp;&nbsp;&nbsp;accessed,&nbsp;and&nbsp;a&nbsp;schema&nbsp;in&nbsp;which&nbsp;it&nbsp;will&nbsp;be&nbsp;returned.&nbsp;Note&nbsp;that&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                006&nbsp;&nbsp;&nbsp;&nbsp;accessor&nbsp;must&nbsp;be&nbsp;able&nbsp;to&nbsp;add&nbsp;knowledge&nbsp;to&nbsp;the&nbsp;knowledge&nbsp;base,&nbsp;as&nbsp;well&nbsp;as
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                007&nbsp;&nbsp;&nbsp;&nbsp;retrieve&nbsp;it.&quot;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                008&nbsp;&nbsp;&nbsp;&nbsp;(:require&nbsp;[wildwood.schema&nbsp;:refer&nbsp;[proposition?]]))
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                009&nbsp;&nbsp;
+                </span><br/>
+<span class="covered" title="1 out of 1 forms covered">
+                010&nbsp;&nbsp;(defprotocol&nbsp;Accessor
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                011&nbsp;&nbsp;&nbsp;&nbsp;(fetch&nbsp;[self&nbsp;id]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Fetch&nbsp;all&nbsp;the&nbsp;knowledge&nbsp;I&nbsp;have&nbsp;about&nbsp;the&nbsp;object&nbsp;identified&nbsp;by
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;`id`&nbsp;value,&nbsp;as&nbsp;a&nbsp;map&nbsp;whose&nbsp;`:id`&nbsp;key&nbsp;has&nbsp;this&nbsp;`id`&nbsp;value.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                014&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*NOTE&nbsp;THAT:*&nbsp;I&nbsp;now&nbsp;think&nbsp;knowledge&nbsp;should&nbsp;only&nbsp;be&nbsp;managed&nbsp;at&nbsp;the
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                016&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wildwood&nbsp;level&nbsp;as&nbsp;sets&nbsp;of&nbsp;propositions,&nbsp;so&nbsp;the&nbsp;idea&nbsp;of&nbsp;bringing
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;back&nbsp;some&nbsp;sort&nbsp;of&nbsp;object&nbsp;representation&nbsp;here&nbsp;is&nbsp;probably&nbsp;wrong.&quot;)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                018&nbsp;&nbsp;&nbsp;&nbsp;(match&nbsp;[self&nbsp;proposition]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Return&nbsp;all&nbsp;the&nbsp;propositions&nbsp;I&nbsp;know&nbsp;which&nbsp;match&nbsp;this&nbsp;proposition.&nbsp;The
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                020&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intended&nbsp;use&nbsp;case&nbsp;here&nbsp;is&nbsp;that&nbsp;you&nbsp;will&nbsp;either&nbsp;supply&nbsp;a&nbsp;fully
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                021&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;proposition&nbsp;to&nbsp;verify&nbsp;that&nbsp;that&nbsp;proposition&nbsp;is&nbsp;true,&nbsp;or&nbsp;else
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;supply&nbsp;a&nbsp;partially&nbsp;specified&nbsp;proposition&nbsp;to&nbsp;query.
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                023&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                024&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.g.&nbsp;passing&nbsp;the&nbsp;proposition
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                025&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                026&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:verb&nbsp;:kill&nbsp;:object&nbsp;:caesar}
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                027&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                028&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;would&nbsp;be&nbsp;a&nbsp;way&nbsp;of&nbsp;asking&nbsp;&#x27;who&nbsp;killed&nbsp;caesar&#x27;,&nbsp;and&nbsp;might&nbsp;return
+                </span><br/>
+<span class="blank" title="0 out of 0 forms covered">
+                029&nbsp;&nbsp;
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                030&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{:verb&nbsp;:kill&nbsp;:subject&nbsp;:brutus&nbsp;:object&nbsp;:caesar}
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                031&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:verb&nbsp;:kill&nbsp;:subject&nbsp;:cassius&nbsp;:object&nbsp;:caesar}
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                032&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:verb&nbsp;:kill&nbsp;:subject&nbsp;:longus&nbsp;:object&nbsp;:caesar}]&quot;)
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                033&nbsp;&nbsp;&nbsp;&nbsp;(store&nbsp;[self&nbsp;proposition]
+                </span><br/>
+<span class="not-tracked" title="0 out of 0 forms covered">
+                034&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Add&nbsp;this&nbsp;`proposition`&nbsp;to&nbsp;the&nbsp;knowledge&nbsp;I&nbsp;hold.&quot;))
+                </span><br/>
+ </body>
+</html>
