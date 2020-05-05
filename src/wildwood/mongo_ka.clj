@@ -4,7 +4,15 @@
   Hierarchical databases seem a very natural fit for how we're storing
   knowledge. Mongo DB seems a particularly natural fit since its
   internal representation is JSON, which can be transformed to EDN
-  extremely naturally."
+  extremely naturally.
+
+  Other candidate hierarchical database implementations/interfaces which
+  might be experimented with include:
+
+  1. [Titanium](https://github.com/clojurewerkz/titanium)
+  2. [Cassandra](https://github.com/clojurewerkz/cassaforte)
+
+  (and many others)."
   (:require [monger.core :as mg]
             [monger.collection :as mc]
             [wildwood.knowledge-accessor :refer [Accessor]])

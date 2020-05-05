@@ -270,6 +270,40 @@ are still further strengthened.
 In proposing a formalism to express propositions, we need to consider how
 it allows this freight to be unpacked.
 
+### Universally located and unlocated propositions
+
+In the last passage, I observed that if we had multiple competing reported locations at which Caesar was said to have been killed, then there was nevertheless agreement on the fact that Caesar had been killed; so while we might be in doubt about whether the death had happened in March or June, there's much less doubt that the death happened.
+
+So we have a hierarchy of confidence in the propositions:
+
+1. We're reasonably certain that Caesar was killed;
+2. We may think it probable that he was killed in March, since we have two independent sources for this;
+3. We're probably more skeptical that he was killed in April, since the report is second hand and since it's inconsistent with the others.
+
+Of these, the first proposition is not located in time. There must have been an event, but we don't know when it was. Strictly, of course, we could in this case assign a broad event - 'the spring' - but what I want to talk about here is cases of things which we believe have happened, but do not know when. The reason I want to talk about them is to draw a clear distinction between unlocated propositions, and universally located propositions.
+
+A universally located proposition is something like
+
+* Water is wet.
+
+Or, to use a more classical example,
+
+* Socrates is a man.
+
+For the purposes of the pedagogy of logic, Socrates is always and everywhere a man. His manliness is universally located; thus the proposition 'Socrates is a man' is always deemed to be true. Consider the proposition 'Socrates was hungry'. This is also, almost certainly true. But he wasn't hungry for all time, he was hungry at most for short periods during his lifetime. There's an important disctinction between
+
+* Socrates is a man
+
+and
+
+* Socrates was hungry
+
+and we need to make that explicit, so that we know whether we're asserting an unlocated proposition or a universal one. I'm going to elect that it is the universal that should always be explicitly stated, so we have
+
+* Water is wet in the universe in all time;
+* Socrates is a man in the universe in all time;
+* Socrates was hungry.
+
 #### Proposition minimisation
 
 { **TODO**: probably lose this. I increasingly think that, whatever the internal representation of the proposition within the advocate or knowledge base, the proposition as passed around must *always* be minimised. This is, in any case, very much an implementation detail. }
