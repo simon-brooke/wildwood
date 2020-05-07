@@ -270,6 +270,64 @@ are still further strengthened.
 In proposing a formalism to express propositions, we need to consider how
 it allows this freight to be unpacked.
 
+### Conjunctions, disjunctions, and confidence
+
+Suppose we have an impeccable witness - one in whom we have 100% confidence - who tells us
+
+* Brutus, Cassius **and** Longus killed Caesar in the Forum on the Ides of March
+
+From this we learn - all with 100% confidence - that
+
+* Brutus is a killer
+* Cassius is a killer
+* Longus is a killer
+* Caesar has been killed
+* The Forum is a place where killings happen
+* The Ides of March are a time to be extra cautious
+
+And there are no problems there. But suppose, instead, our witness had said
+
+* Brutus, Cassius **or** Longus killed Caesar in the Forum on the Ides of March
+
+What do we learn? Natural English does not distinguish between inclusive and exclusive disjunction. So we still know, with 100% certainty
+
+* Caesar has been killed
+* The Forum is a place where killings happen
+* The Ides of March are a time to be extra cautious
+
+Do we know with any confidence at all that `Brutus is a killer`? We know with certainty that one of the three is a killer; there is a possibility (inclusive `or`) that all are killers. So it seems to me, naively, that we can at least divide the confidence we have in the initial, composite proposition by the number of disjuncts.
+
+So we now have
+
+* Brutus is a killer (33%)
+* Cassius is a killer (33%)
+* Longus is a killer (33%)
+* Caesar has been killed (100%)
+* The Forum is a place where killings happen (100%)
+* The Ides of March are a time to be extra cautious (100%)
+
+But wait.
+
+What happens if we learn from another impeccable source that `Longus is not a killer`. What does that say about whether Brutus is? Obviously the confidence in the idea that `Brutus is a killer` must increase, so the three propositions
+
+* Brutus is a killer
+* Cassius is a killer
+* Longus is a killer
+
+are not distict. Change in confidence in one implies change in confidence in the others. But how?
+
+Suppose instead our second impeccable source had instead confirmed that `Longus killed Caesar in the Forum`. By the logic that said that the negation of this would cause our confidence in the possibility that `Brutus is a killer` should increase, surely now it must decrease?
+
+But wait further.
+
+Suppose our second impeccable source says `Cassius and Longus killed Caesar in the Forum`. Now we know that the **or** - the disjunction - was not exclusive. We know that two of the accused are guilty. What, if anything, does this say about Brutus? Is our confidence that he, too, is a killer, increased or decreased by this? I cannot see any justification for either.
+
+#### TODO: read
+
+* http://web.mit.edu/24.954/www/files/simons.disjunction.pdf
+* https://link.springer.com/chapter/10.1007/BFb0031745
+
+
 ### Universally located and unlocated propositions
 
 In the last passage, I observed that if we had multiple competing reported locations at which Caesar was said to have been killed, then there was nevertheless agreement on the fact that Caesar had been killed; so while we might be in doubt about whether the death had happened in March or June, there's much less doubt that the death happened.
