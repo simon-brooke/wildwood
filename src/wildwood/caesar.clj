@@ -115,21 +115,21 @@
    :longus [{:verb :kill :subject :longus :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
    :forum [{:verb :kill :subject :longus :object :caesar :location :forum :date ides-of-march :nth-hand 1}]})
 
-(def drusila-kb
-  "Drusila has heard that Brutus killed Caesar in the forum. She keys it on all three, for efficiency
+(def drusilla-kb
+  "Drusilla has heard that Brutus killed Caesar in the forum. She keys it on all three, for efficiency
   of retrieval."
   {:caesar [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :nth-hand 2}
             {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :nth-hand 1}]
    :brutus [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :nth-hand 2}]
    :forum [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :nth-hand 2}]})
 
-(def faldo-db
+(def falco-kb
   "Falco believes that Caesar has been killed, but doesn't know by whom or when."
   {:caesar [{:verb :kill :object :caesar :location :forum}]
    :brutus [{:verb :kill :object :caesar :location :forum}]
    :forum [{:verb :kill :object :caesar :location :forum}]})
 
-(def gaius-db
+(def gaius-kb
   "Gaius has heard that Brutus killed Caesar, but believes it happened in April."
   {:caesar [{:verb :kill :subject :brutus :object :caesar :location :forum :date april :nth-hand 2}]
    :brutus [{:verb :kill :subject :brutus :object :caesar :location :forum :date april :nth-hand 2}]
@@ -141,4 +141,34 @@
   {:caesar [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
    :cassius [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
    :forum [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :nth-hand 1}]})
+
+(defn knowledge
+  "The way I've encoded propositions in the sample `wildwood.caesar` namespace
+  is experimental and probably clumsy. This function, given such knowledge
+  bases, returns a single set of distinct propositions. It also makes it easier
+  to keep this namespace working if (as is likely) the underlying encoding
+  changes. Argument: `kbs`: knowledge bases, taken from `wildwood.caesar`."
+  [& kbs]
+  (set
+    (reduce
+      concat
+      (map
+        (fn [kb]
+          (reduce
+            concat
+            (map
+              #(kb %)
+              (keys kb))))
+        kbs))))
+
+;; (knowledge k/brutus-kb k/cassius-kb)
+(def all-knowledge
+  (knowledge
+    k/anthony-kb
+    k/brutus-kb
+    k/cassius-kb
+    k/drusilla-kb
+    k/falco-kb
+    k/gaius-kb
+    k/longus-kb))
 
