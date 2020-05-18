@@ -74,10 +74,10 @@
   * `was-unarmed` - true of an entity at a time `t` if they were unarmed at the time.
 
   Note that ALL of this is too complex for the simple DTree logic of the Arboretum /
-  KnacqTools generation. They could not unpack propositions as I'm proposing here.
-  "
-  (:require [wildwood.knowledge-accessor :refer [Accessor]]
-            [wildwood.advocate :refer [Advocate]]))
+  KnacqTools generation. They could not unpack propositions as I'm proposing here."
+  (:require [wildwood.advocate :refer [Advocate]]
+            [wildwood.knowledge-accessor :refer [Accessor]]
+            [wildwood.logic :as l]))
 
 
 (def ides-of-march
@@ -96,79 +96,102 @@
   "The month of April, 44BC, as a range."
   (sort [(+ -440000 400 1) (+ -440000 400 30)]))
 
+(defrecord KnowledgeBase [propositions]
+  Accessor
+  (fetch [self id]
+         (reduce
+           concat
+           (filter
+             (fn [p]
+               (some?
+                 (fn [k] (= (p k) id))
+                 (keys p))))
+           (.propositions self)))
+  (match [self proposition]
+         (l/match proposition (.propositions self)))
+  (store [self proposition]
+         (throw (UnsupportedOperationException. "Not yet implemented"))))
+
+
 (def anthony-kb
   "Mark Antony knows that Brutus is honourable, and that Caesar is buried."
-  {:brutus [{:verb :is :subject :brutus :object :honourable}]
-   :caesar [{:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :nth-hand 1}]})
+  (KnowledgeBase.
+    [{:verb :is :subject :brutus :object :honourable :authority :anthony}
+     {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :authority :anthony}]))
 
 (def brutus-kb
   "Brutus will admit that he and Cassius were in the forum in the Ides of March"
-  {:brutus [{:verb :present :subject :brutus :object :forum :location :forum :date ides-of-march :nth-hand 1}]
-   :cassius [{:verb :present :subject :cassius :object :forum :location :forum :date ides-of-march :nth-hand 1}]
-   :forum [{:verb :present :subject :brutus :object :forum :location :forum :date ides-of-march :nth-hand 1}
-           {:verb :present :subject :cassius :object :forum :location :forum :date ides-of-march :nth-hand 1}]})
+  (KnowledgeBase.
+    [{:verb :present :subject :brutus :object :forum :location :forum :date ides-of-march :authority :brutus}
+     {:verb :present :subject :cassius :object :forum :location :forum :date ides-of-march :authority :brutus}]))
 
 (def cassius-kb
   "Cassius and Longus each bear witness that the other killed Caesar in the
   Forum on the Ides of March."
-  {:caesar [{:verb :kill :subject :longus :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
-   :longus [{:verb :kill :subject :longus :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
-   :forum [{:verb :kill :subject :longus :object :caesar :location :forum :date ides-of-march :nth-hand 1}]})
+  (KnowledgeBase.
+    [{:verb :kill :subject :longus :object :caesar :location :forum :date ides-of-march :authority :cassius}]))
 
 (def drusilla-kb
-  "Drusilla has heard that Brutus killed Caesar in the forum. She keys it on all three, for efficiency
-  of retrieval."
-  {:caesar [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :nth-hand 2}
-            {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :nth-hand 1}]
-   :brutus [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :nth-hand 2}]
-   :forum [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :nth-hand 2}]})
+  "Drusilla has heard that Brutus killed Caesar in the forum. "
+  (KnowledgeBase.
+    [{:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march
+      ;; Second hand knowledge. The `:data` (maybe should be `:warrant`?)
+      ;; shows, as two-position propositions, that Drusilla learned this
+      ;; from Calpurnia, and the authority is Drusilla since that's who the
+      ;; knowledge comes from. I think.
+      :data [{:verb :utter :subject :calpurnia
+              :object {:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :authority :calpurnia}
+              :authority :drusilla}
+             {:verb :hear :subject :calpurnia
+              :object {:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :authority :calpurnia} :authority :drusilla}]
+      :authority :drusilla}
+     {:verb :utter :subject :calpurnia :object {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :authority :calpurnia}
+      :authority :drusilla}
+     {:verb :hear :subject :calpurnia :object {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :authority :calpurnia}
+      :authority :drusilla}
+     {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :authority :drusilla
+      :data [{:verb :utter :subject :calpurnia :object {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :authority :calpurnia}
+              :authority :drusilla}
+             {:verb :hear :subject :calpurnia :object {:verb :bury :subject :calpurnia :object :caesar :date eighteenth-march :authority :calpurnia}
+              :authority :drusilla}]}]))
 
 (def falco-kb
   "Falco believes that Caesar has been killed, but doesn't know by whom or when."
-  {:caesar [{:verb :kill :object :caesar :location :forum}]
-   :brutus [{:verb :kill :object :caesar :location :forum}]
-   :forum [{:verb :kill :object :caesar :location :forum}]})
+  (KnowledgeBase.
+    [{:verb :kill :object :caesar :location :forum :authority :falco}]))
 
 (def gaius-kb
   "Gaius has heard that Brutus killed Caesar, but believes it happened in April."
-  {:caesar [{:verb :kill :subject :brutus :object :caesar :location :forum :date april :nth-hand 2}]
-   :brutus [{:verb :kill :subject :brutus :object :caesar :location :forum :date april :nth-hand 2}]
-   :forum [{:verb :kill :subject :brutus :object :caesar :location :forum :date april :nth-hand 2}]})
+  (KnowledgeBase.
+    ;; TODO: replace that nth-hand with an actual warrant. Who did he hear it from?
+    [{:verb :kill :subject :brutus :object :caesar :location :forum :date april :nth-hand 2 :authority :gaius}]))
 
 (def longus-kb
   "Cassius and Longus each bear witness that the other killed Caesar in the
   Forum on the Ides of March."
-  {:caesar [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
-   :cassius [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :nth-hand 1}]
-   :forum [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :nth-hand 1}]})
+  (KnowledgeBase.
+    [{:verb :kill :subject :cassius :object :caesar :location :forum :date ides-of-march :authority :longus}]))
 
-(defn knowledge
-  "The way I've encoded propositions in the sample `wildwood.caesar` namespace
-  is experimental and probably clumsy. This function, given such knowledge
-  bases, returns a single set of distinct propositions. It also makes it easier
-  to keep this namespace working if (as is likely) the underlying encoding
-  changes. Argument: `kbs`: knowledge bases, taken from `wildwood.caesar`."
-  [& kbs]
-  (set
-    (reduce
-      concat
-      (map
-        (fn [kb]
-          (reduce
-            concat
-            (map
-              #(kb %)
-              (keys kb))))
-        kbs))))
+(defrecord CompoundKnowledgeBase [kbs]
+  Accessor
+  (fetch [self id]
+         (throw (UnsupportedOperationException. "Not yet implemented")))
+  (match [self proposition]
+         (l/match proposition (reduce concat (map #(.propositions %) (.kbs self)))))
+  (store [self proposition]
+         (throw (UnsupportedOperationException. "Not yet implemented"))))
 
-;; (knowledge k/brutus-kb k/cassius-kb)
+
+;; (knowledge brutus-kb cassius-kb)
 (def all-knowledge
-  (knowledge
-    k/anthony-kb
-    k/brutus-kb
-    k/cassius-kb
-    k/drusilla-kb
-    k/falco-kb
-    k/gaius-kb
-    k/longus-kb))
+  (CompoundKnowledgeBase.
+    [anthony-kb
+     brutus-kb
+     cassius-kb
+     drusilla-kb
+     falco-kb
+     gaius-kb
+     longus-kb]))
+
+
 

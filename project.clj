@@ -16,6 +16,5 @@
             [lein-codox "0.10.7"]
             [lein-cucumber "1.0.2"]
             [lein-gorilla "0.4.0"]]
-  :repl-options {:init-ns wildwood.core}
-  :url "https://simon-brooke.github.io/wildwood/"
-  )
+  :repl-options {:init-ns wildwood.caesar}
+  :url "https://simon-brooke.github.io/wildwood/")
