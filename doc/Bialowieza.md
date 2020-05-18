@@ -83,9 +83,8 @@ There may be many other privileged keys, such as
 
 * `:location` - where did it happen? value might be something from which proximity may be derived;
 * `:time` - when did it happen? This needs to be a value with a canonical order, such as a number;
-* `:truth` - is it true? if present and value `false`, negates the proposition;
-* `:confidence` - how sure am I? A value, perhaps, in the range -1 to 1, although conventionally if less than 1 we probably set the `:truth` value to false;
-* `:data` - an argument structure...!
+* `:confidence` - how sure am I? A value, perhaps, in the range -1 to 1, where values less than one in effect represent a belief that the proposition is false;
+* `:data` - a collection of (zero or more) argument structures;
 * `:authority` - id of agent from whom, or rule from which, I know this;
 
 and so on. The exact set of privileged keys is probably actually a matter for
@@ -100,7 +99,7 @@ closely onto the [Toulmin schema](Analysis.html#the-toulmin-schema). Thus we can
 
 * that the proposition itself is a `claim` in the sense of the **C** term;
 * that `:data` above is precisely `data` in the sense of the **D** term in Toulmin's schema, but may (is likely to) also provide a `warrant` in the sense of the **W** term;
-* that `:truth` and `:confidence` are both `qualifiers` of the claim in the sense of the **Q** term;
+* that `:confidence` is a `qualifier` of the claim in the sense of the **Q** term;
 * that `:authority` is a form of `backing` in the sense of the **B** term.
 
 So what, then, is an 'argument structure', as described above? It seems to me
@@ -108,8 +107,6 @@ that it may be exactly a proposition, with the special feature that the value
 of the `:data` key is not minimised.
 
 Recall that in the chapter on Arboretum I observed that [the working of the DTree decision algorithm caused precisely those nodes to be collected whose fragments which provided the most relevant explanation](Arboretum.html#relevance-filtering) to support the decision, in a natural sequence from the general to the particular. I believe that precisely the same fortuitous alchemy will provide the argument structure to provide Toulmin's **D** - out `:data` term. The DTree itself then becomes the **W** - the `:warrant`; and the author of the DTree becomes the `:authority`.
-
-{ **TODO**: investigate how this notion of a proposition - and a Toulmin structure - relates to situation semantics; especially, consider how locating a proposition in time and space captures the notion of a situation. }
 
 ### The located proposition
 
@@ -142,9 +139,9 @@ The size of an event is, of course, a slightly slippery notion. The inference th
 
 ### Are located two-position propositions sufficient?
 
-The reason I like the idea of investigating whether located two position propositions are sufficient is that a very regular knowlege representation is easy to compute over. The reason I think it might not be is this:
+The reason I like the idea of investigating whether located two position propositions are sufficient is that a very regular knowlege representation is easy to compute over. The reason I think it might not be is that some things don't - at first glance - seem to fit naturally into this schema.
 
-Suppose Calpurnia told Drusilla that Brutus killed Caesar in the Forum on the Ides of March. For simplicity, let's call
+For example, suppose Calpurnia told Drusilla that Brutus killed Caesar in the Forum on the Ides of March. For simplicity, let's call
 
 * Brutus killed Caesar in the Forum on the Ides of March.
 
@@ -156,9 +153,33 @@ So we have a notional event E<sub>1</sub> such that
 * P<sub>2</sub> := 'Calpurnia uttered P<sub>1</sub> at E<sub>1</sub>.'
 * P<sub>3</sub> := 'Drusilla heard P<sub>1</sub> at E<sub>1</sub>.'
 
-And the warrant for the belief that P<sub>1</sub> is the conjunction of P<sub>2</sub> and P<sub>3</sub>.
+And the warrant for Drusilla's belief that P<sub>1</sub> is the conjunction of P<sub>2</sub> and P<sub>3</sub>.
 
-Writing it down like that, it kind of works, but I'm not yet wholly persuaded. It feels clumsy.
+So we can represent this as
+
+```clojure
+    {:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march
+      :data [{:verb :utter :subject :calpurnia
+              :object {:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :authority :calpurnia}
+              :authority :drusilla}
+             {:verb :hear :subject :calpurnia
+              :object {:verb :kill :subject :brutus :object :caesar :location :forum :date ides-of-march :authority :calpurnia} :authority :drusilla}]
+      :authority :drusilla}
+```
+
+Taking it further to look at the sorts of things required by [The Great Game](https://simon-brooke.github.io/the-great-game/codox/), there are two classes of things which need frequently to be handled. one is the passing of news, in [gossip](https://blog.journeyman.cc/2008/04/the-spread-of-knowledge-in-large-game.html); and the other is recording trading information, in [markets](https://simon-brooke.github.io/the-great-game/codox/the-great-game.merchants.markets.html).
+
+The **gossip** case is covered by the *Calpurnia told Drusilla* example given above, leaving the markets case. When trading in markets we need three things: who sold the consignment, who bought the consignment, and the unit price of the commodity. Note that putting it like that makes a `consignment` a first class entity, with properties of at least `commodity` and `quantity`.
+
+So, again, we have a notional event E<sub>2</sub> at which a commodity C<sub>1</sub> was traded, where E<sub>2</sub> has (for example) a location of `Forfar` and a timestamp of 202005181600; while C<sub>1</sub> has a commodity of `Fish` and a quantity of `50`. Let's say the price was 4 bronze coins per kilo.
+
+This transaction could be represented by the propositions:
+
+* P<sub>4</sub> := 'Donald sold 50 Kg of Fish in Forfar at 202005181600'
+* P<sub>5</sub> := 'Fiona bought 50 Kg of Fish in Forfar at 202005181600'
+* P<sub>6</sub> := 'Fish sold for 4 bronze/Kg in Forfar at 202005181600'
+
+So it seems to me that it's possible to represent the things I know I need to represent, using only located two-position propositions.
 
 As an exercise for the reader, how would we represent 'Dirck, Joris and I carried the good news from Ghent to Aix' using only located two position propositions? It feels, as I said, clumsy.
 
@@ -204,7 +225,7 @@ I'd argue that these are clearly very similar.
 
 My schema does not specify that "at I1: ... understands, a, c; no", but there's a reason for that.
 
-### Learning, consistency and confidence
+### Learning, consistency, trust and confidence
 
 Let us suppose that Drusilla already knows the proposition that
 
@@ -214,7 +235,7 @@ Calpurnia now tells her that
 
 * Brutus killed Caesar in the Forum on the Ides of March.
 
-The two accounts are compatible; this compatibility migh be represented, if you choose, by two further  propositions:
+The two accounts are compatible; this compatibility might be represented, if you choose, by two further propositions:
 
 * P<sub>4</sub> The Forum is within Rome.
 * P<sub>5</sub> The Ides of March is within March.
@@ -227,7 +248,14 @@ When she learns from Calpurnia that Brutus killed Caesar in the Forum on the Ide
 
 By contrast, if Falco then says 'No, I heard from Gaius that it happened in April', then that casts doubt on both the first two claims - but also on this new claim. Because the claims are not compatible, they can't all be right.
 
-For the time being, I'm going to leave the issue of how confidence is derived and adjusted as an implementation detail; I don't - yet, at any rate - have an account of how this should work that I can defend. However, there's one further significant point to make about propositions before we move on.
+For the time being, I'm going to leave the issue of how confidence is derived and adjusted as an implementation detail; I don't - yet, at any rate - have an account of how this should work that I can defend. There are two main avenues to explore,
+
+1. [The Kolmogorov axioms](https://en.wikipedia.org/wiki/Probability_axioms);
+2. [Cox's theorem](https://en.wikipedia.org/wiki/Cox%27s_theorem)
+
+However, I haven't yet worked out what the implications of either of these are for my schema.
+
+However, there's one further significant point to make about propositions before we move on.
 
 ### On the subtext of propositions
 
